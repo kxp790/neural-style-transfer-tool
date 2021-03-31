@@ -10,7 +10,7 @@ pins_collection = style_transfer_db['pins']
 def make_sample_data():
     designs_data = {
         'id' : 'af2iak2jh3',
-        'style_image_id' : 3,
+        'style_image_name' : 'stained-glass.jpg',
         'layers' : {
             'block1_conv1': 0.2,
             'block2_conv1': 0.3,
@@ -28,8 +28,3 @@ def make_sample_data():
         'pin' : 1234
     }
     pins_collection.insert_one(pins_data)
-
-def get_model_design_data(model_design_id):
-    for entry in designs_collection.find({'id': model_design_id}):
-        print(entry)
-        return(entry)
