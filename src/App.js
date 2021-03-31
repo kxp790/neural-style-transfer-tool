@@ -1,35 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.scss';
-import logo from './logo.png';
-
-const ImageWrapper = ({src, title}) => (
-  <div class="img-wrapper">
-    <p>{title}</p>
-    <img src={src} />
-  </div>
-)
-
-const Form = () => (
-  <form method="POST" action="http://localhost:5000" enctype="multipart/form-data">
-    <p><input type="file" name="file" accept=".jpg" /></p>
-    <p><input type="submit" value="Submit" /></p>
-  </form>
-)
+import Header from './Header';
+import HomePage from './components/HomePage';
+import ModelDesignPage from './components/ModelDesignPage';
+import ResultPage from './components/ResultPage';
+import SupportPage from './components/SupportPage';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1>PHOTO STYLER</h1>
-          <div class="cards">
-            <ImageWrapper src="http://localhost:5000/before" title="BEFORE" />
-            <ImageWrapper src="http://localhost:5000/after" title="AFTER" />
-          </div>
-          <Form />
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Header />
+        <Switch>
+          <Route path="/" exact component={HomePage}/>
+          <Route path="/model" component={ModelDesignPage}/>
+          <Route path="/result" component={ResultPage}/>
+          <Route path="/support" component={SupportPage}/>
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
 export default App;
+
+// export default (
+//   <Route path="/" component={App}>
+//     <IndexRoute component={HomePage} />
+//     <Route path="/model_design" component={ModelDesignPage} />
+//     <Route path="/result" component={ResultPage} />
+//   </Route>
+// );
