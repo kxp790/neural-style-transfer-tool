@@ -2,12 +2,17 @@ import os
 from flask import Flask, flash, request, redirect, url_for, session, send_file
 from pathlib import Path
 import time
+import json
 from werkzeug.utils import secure_filename
 from shutil import copyfile
 import model
-from data.database import get_model_design_data
+from flask_pymongo import PyMongo
+from bson import json_util
 
 app = Flask(__name__)
+
+mongodb_client = PyMongo(app, uri="mongodb://localhost:27017/styleTransferDB")
+db = mongodb_client.db
 
 # path to inputs
 INPUT_FOLDER = 'data/input'
@@ -20,7 +25,7 @@ app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
 # disable caching
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
-# image name hardcoded for testing purposes until model design id's work 
+# temporary test image name
 image_name = 'test.jpg'
 
 # receive image and style it
@@ -44,13 +49,18 @@ def output_file():
             # redirect when done
             return redirect('http://localhost:3000/result')
 
-# send input image
-@app.route('/input/test', methods=['GET'])
-def get_input_image():
+# get input image
+@app.route('/input/<string:image_name>', methods=['GET'])
+def get_input_image(image_name):
     return send_file(INPUT_FOLDER + '/' + image_name)
 
-# send output image
-@app.route('/output/test', methods=['GET'])
-def get_output_image():
+# get output image
+@app.route('/output/<string:image_name>', methods=['GET'])
+def get_output_image(image_name):
     return send_file(OUTPUT_FOLDER + '/' + image_name)
-    
+
+# find model design instance by id
+@app.route('/design/<string:design_id>')
+def home(design_id):
+    design = db.designs.find_one({"id": design_id})
+    return json.loads(json_util.dumps(design))

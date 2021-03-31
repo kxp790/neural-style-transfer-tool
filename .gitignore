@@ -29,3 +29,9 @@ __pycache__
 
 # vscode
 .vscode
+
+# MongoDB local database
+database/
+
+# Model draft 
+api/model.py
