@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from './AppContext';
 
-export const LayerSelectionItem = () => {
+export const StyleLayerSelectionItem = () => {
     const design = useContext(AppContext)
     const layers = useContext(AppContext)
 
@@ -16,4 +16,4 @@ export const LayerSelectionItem = () => {
     )
 }
 
-export default LayerSelectionItem;
+export default StyleLayerSelectionItem;

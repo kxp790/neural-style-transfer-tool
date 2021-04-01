@@ -1,13 +1,15 @@
-import os
-from flask import Flask, flash, request, redirect, url_for, session, send_file
-from pathlib import Path
-import time
 import json
-from werkzeug.utils import secure_filename
+import os
+import time
+from pathlib import Path
 from shutil import copyfile
-import model
-from flask_pymongo import PyMongo
+
 from bson import json_util
+from flask import Flask, flash, redirect, request, send_file, session, url_for
+from flask_pymongo import PyMongo
+from werkzeug.utils import secure_filename
+
+import model
 
 app = Flask(__name__)
 
@@ -43,7 +45,8 @@ def output_file():
             return redirect(request.url)
         # if file has an allowed extension
         if file:
-            file.save(INPUT_FOLDER + image_name)
+            file.save(os.path.join(app.config['INPUT_FOLDER'], image_name))
+            copyfile(INPUT_FOLDER + '/' + image_name, OUTPUT_FOLDER + '/' + image_name)
             # get styled image
             model.style_transfer(image_name, 'stained-glass')
             # redirect when done
