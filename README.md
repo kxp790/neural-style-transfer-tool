@@ -8,6 +8,13 @@ Frontend:
 Backend:
 `yarn start-api`
 
+### Database
+Run local MongoDB
+`./mongod`
+`./mongo`
+Run PyMongo script for the database
+`python3 .../api/data/database.py`
+
 ### Test
 Launch the test runner in interactive watch mode:
 `yarn test`
@@ -16,3 +23,4 @@ Launch the test runner in interactive watch mode:
 - Python
 - Flask
 - React
+- MongoDB

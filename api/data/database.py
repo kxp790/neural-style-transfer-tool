@@ -11,7 +11,8 @@ def make_sample_data():
     designs_data = {
         'id' : 'af2iak2jh3',
         'style_image_name' : 'stained-glass.jpg',
-        'layers' : {
+        'content_layer' : 'block4_conv2',
+        'style_layers' : {
             'block1_conv1': 0.2,
             'block2_conv1': 0.3,
             'block3_conv1': 0.3,
@@ -19,7 +20,8 @@ def make_sample_data():
             'block5_conv1': 0.15
         },
         'content_wight' : 20,
-        'style_weight' : 30
+        'style_weight' : 30,
+        'iterations' : 50
     }
     designs_collection.insert_one(designs_data)
 
@@ -28,3 +30,5 @@ def make_sample_data():
         'pin' : 1234
     }
     pins_collection.insert_one(pins_data)
+
+make_sample_data()
