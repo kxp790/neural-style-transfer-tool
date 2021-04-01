@@ -1,6 +1,6 @@
 # Image Style Transfer
 
-Web app for photo styling being built as a BSc final year project 2020/2021.
+Web app for investigating image style transfer with VGG16. Built as a BSc final year project 2020/2021.
 
 ### Run
 Frontend:
