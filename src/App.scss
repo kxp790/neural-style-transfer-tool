@@ -1,3 +1,23 @@
+$primary_1: #24323d;
+$primary_2: #2e3e4d;
+$primary_3: #374a5c;
+$primary_4: #40576b;
+$primary_5: #49637a;
+$primary_6: #52708a;
+$primary_6: #6b89a3;
+$primary_7: #7c96ad;
+$primary_8: #8ca3b8;
+$primary_9: #9db0c2;
+
+$secondary_1: #00b9bc;
+$secondary_2: #00a5a7;
+$secondary_3: #009092;
+$secondary_4: #007c7d;
+$secondary_5: #006769;
+$secondary_6: #005254;
+$secondary_7: #003e3f;
+$secondary_8: #00292a;
+
 .App {
   text-align: center;
   align-items: center;
@@ -11,7 +31,7 @@
   display: flex;
   justify-content: space-between;
   height: 6vh;
-  background-color: #374a5c;
+  background-color: $primary_3;
   color: azure;
 
   .logo {
@@ -158,7 +178,7 @@
   padding: 2vh;
 
   .layer-text-box {
-    background-color: #24323d;
+    background-color: $primary_1;
     color: azure;
     padding: 5px;
     min-width: fit-content;
@@ -168,7 +188,7 @@
   }
 
   .layer-text-box:hover {
-    background-color: #52708a;
+    background-color: primary_6;
   }
 }
 
@@ -180,23 +200,23 @@
 }
 
 .input-text-box {
-  size: 200%;
   font-size: 26px;
   max-width: 15vh;
   padding: 1vh 2vh;
   text-align: center;
-  background-color: #adbecc;
+  background-color: $primary_9;
   border-radius: 5px;
-  border: 2px solid #374a5c !important;
+  border: 2px solid $primary_3 !important;
+  
 }
 
 // step-progress bubble
 ._2kL0S {
-  background-color: #49637a !important;
+  background-color: primary_5 !important;
 }
 // step-progress bubble done
 ._2JvrO {
-  background-color: #00a5a7 !important;
+  background-color: secondary_2 !important;
 }
 // step-progress content padding to center "previous"/"next" button container
 ._2_g61 {
@@ -206,15 +226,15 @@
 ._3CDiP {
   border-width: 1px;
   &:hover{
-    background-color: #24323d;
+    background-color: $primary_1;
   }
 }
 // "next" button
 ._hsN1w {
-  background-color: #49637a !important;
-  border-color: #00a5a7 !important;
+  background-color: primary_5 !important;
+  border-color: secondary_2 !important;
   border-width: 1px;
   &:hover {
-    background-color: #24323d !important;
+    background-color: $primary_1 !important;
   }
 }
