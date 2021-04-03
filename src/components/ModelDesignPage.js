@@ -15,9 +15,9 @@ const ModelDesignPage = () => {
     
     // setup the step content
     const imageInput = <ImageInputItem />;
+    const styleSelection = <StyleSelectionItem />;
     const contentLayerSelection = <ContentLayerSelectionItem />;
     const styleLayerSelection = <StyleLayerSelectionItem />;
-    const styleSelection = <StyleSelectionItem />;
     const parameterSelection = <ParameterSelectionItem />;
     
     // setup step validators, will be called before proceeding to the next step

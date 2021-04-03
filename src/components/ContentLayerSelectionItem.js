@@ -6,13 +6,16 @@ const ContentLayerSelectionItem = () => {
     const layers = useContext(AppContext)
 
     return (
-        <AppContext.Consumer>
-            {({layers}) => (
-            <div >
-                <p>{layers.map(layer => <p>{layer}</p>)}</p>
-            </div>
-            )}
-        </AppContext.Consumer>
+        <div className="model-item-container">
+            <br></br>
+            <AppContext.Consumer>
+                {({layers}) => (
+                    <div>
+                        {layers.map(layer => <p className="layer-text-box">{layer}</p>)}
+                    </div>
+                )}
+            </AppContext.Consumer>
+        </div> 
     )
 }
 

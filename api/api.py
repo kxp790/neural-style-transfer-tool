@@ -52,6 +52,12 @@ def output_file():
             # redirect when done
             return redirect('http://localhost:3000/result')
 
+# check excisting design id
+@app.route('/check_design_id/<string:design_id>')
+def check_design_id(design_id):
+    design = db.designs.find_one({"id": design_id})
+    return (json.loads(json_util.dumps(design.id)) == 'design_id')
+
 # get input image
 @app.route('/input/<string:image_name>', methods=['GET'])
 def get_input_image(image_name):

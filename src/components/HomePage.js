@@ -1,13 +1,24 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom'; 
-import { AppContext } from './AppContext';
+import React, { useState } from 'react';
+import { Link, Redirect } from 'react-router-dom'; 
+import DesignIdForm from './DesignIdForm';
 
-export const HomePage = () => (
-    <div className="button-holder">
-        <Link to="/model" className="button button1">Start</Link>
-        <p className="pad">or</p>
-        <Link to="/model" className="button button2">Continue</Link>
-    </div>
-)
+export const HomePage = () => {
+    
+    const [designId, setDesignId] = useState([])
+
+    const validateDesignId = () => {
+        
+    }
+
+    return(
+        <div className="button-container">
+            <Link to="/model" className="button button1">Start</Link>
+            <div><br></br></div>
+            <div><p>OR</p></div>
+            <div><br></br></div>
+            <DesignIdForm value={designId} onFormChange={(v) => {setDesignId(v)}} validate={validateDesignId}/>
+        </div>
+    )
+}
 
 export default HomePage

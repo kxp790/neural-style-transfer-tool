@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { AppContext } from './components/AppContext';
 
 import ContentLayerSelectionItem from './components/ContentLayerSelectionItem';
@@ -15,7 +15,8 @@ import StyleSelectionItem from './components/StyleSelectionItem';
 
 import './App.scss';
 
-function App() {
+const App = () => {
+
   const [design, setDesign] = useState();
   const layers = ['conv_1_1', 'conv_1_2', 
                   'conv_2_1', 'conv_2_2', 
@@ -36,15 +37,18 @@ function App() {
       <AppContext.Provider value={{design, layers}}>
         <div className="App">
           <Header />
-          <Switch>
+          {(design === undefined) ? (<Redirect to="/" />) : (
+            <Switch>
             <Route path="/" exact component={HomePage}/>
-            <Route path="/model" exact children={<ModelDesignPage design={design, layers} />} />
+            <Route path="/model" exact children={<ModelDesignPage design={design} />} />
+            <Route path="/model/input" exact children={<ImageInputItem design={design} />} />
             <Route path="/model/content_layers" exact children={<ContentLayerSelectionItem design={design, layers} />} />
             <Route path="/model/style_layers" exact children={<StyleLayerSelectionItem design={design, layers} />} />
-            <Route path="/model/style" exact children={<StyleSelectionItem design={design, layers} />} />
-            <Route path="/result" exact children={<ResultPage design={design, layers} />} />
+            <Route path="/model/style" exact children={<StyleSelectionItem design={design} />} />
+            <Route path="/model/parameter" exact children={<ParameterSelectionItem design={design} />} />
+            <Route path="/result" exact children={<ResultPage design={design} />} />
             <Route path="/support" component={SupportPage}/>
-          </Switch>
+          </Switch>)}
         </div>
       </AppContext.Provider>
     </BrowserRouter>

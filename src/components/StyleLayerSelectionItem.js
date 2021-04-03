@@ -6,13 +6,15 @@ export const StyleLayerSelectionItem = () => {
     const layers = useContext(AppContext)
 
     return (
-        <AppContext.Consumer>
-            {({layers}) => (
-            <div >
-                <p>{layers.map(layer => <p>{layer}</p>)}</p>
-            </div>
-            )}
-        </AppContext.Consumer>
+        <div className="model-item-container">
+            <AppContext.Consumer>
+                {({layers}) => (
+                <div >
+                    <p>{layers.map(layer => <p>{layer}</p>)}</p>
+                </div>
+                )}
+            </AppContext.Consumer>
+        </div>
     )
 }
 

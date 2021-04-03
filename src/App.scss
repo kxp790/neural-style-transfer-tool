@@ -2,32 +2,38 @@
   text-align: center;
   align-items: center;
   background-color: #4a4c50;
+  background-image: url("images/background.png");
   color: azure;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .App-header {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  min-height: 5vh;
-  background-color: #3e4044;
-  color: white;
+  justify-content: space-between;
+  height: 6vh;
+  background-color: #374a5c;
+  color: azure;
 
-  left {
-    color: black;
-    float: left;
+  .logo {
+    vertical-align: middle;
+    padding-left: 10vh;
+    padding-right: 10vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    max-height: 4vh;
   }
 
-  right {
-    flex-direction: row;
-    float: right;
+  .header-links {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    vertical-align: middle;
+    min-height: 5vh;
+    list-style: none;
+    text-decoration: none;
+    padding-right: 10vh;
+    color: azure;
   }
-}
-
-.App-logo {
-  height: 5vmin;
-  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -43,25 +49,6 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-.header-links {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  min-height: 5vh;
-  width: 50%;
-  list-style: none;
-  color: azure;
-  text-decoration: none;
-}
-
-.logo-container {
-  align-self:left;
 }
 
 .img-wrapper {
@@ -90,18 +77,6 @@
   justify-content: center;
 }
 
-form {
-  display: flex;
-  align-items: flex-start;
-  padding-top: 10vh;
-  padding-left: 50vh;
-  padding-right: 50vh;
-
-  input[type="Submit"]:hover {
-    background-color: #46B2AD;
-  }
-}
-
 .button {
   text-align: center;
   vertical-align: middle;
@@ -111,57 +86,135 @@ form {
   flex-direction: row;
   border-radius: 12px;
   padding: 12px 16px;
-  width: 10vh;
+  width: 15vh;
   min-width: fit-content;
-  font-size: 16px;
+  font-size: 16px !important;
   border: 2px solid;
-  text-shadow: pink;
+
+  &.button1 {
+    color: azure;
+    background-color: #3a3b4d; 
+    border-color: darkturquoise;
+  }
+  
+  &.button2 {
+    color: azure;
+    background-color: #3a3b4d; 
+    border-color: azure;  
+  }
+  
+  &.button1:hover {
+    color: azure;
+    background-color: darkturquoise;
+  }
+  
+  &.button2:hover {
+    color: azure;
+    background-color: darkturquoise;
+  }
 }
 
-.button1 {
-  color: azure;
-  background-color: #3a3b4d; 
-  border-color: darkturquoise;
+.button-container {
+  padding: 10vh;
+  padding-top: 20vh;
 }
 
-.button2 {
-  color: azure;
-  background-color: #3a3b4d; 
-  border-color: azure;  
+.pad-style-image {
+  height: 50vh;
+  justify-content: center;
+  vertical-align: middle; 
+  padding-left: 5vh;
+  padding-right: 5vh;
 }
 
-.button1:hover {
-  color: azure;
-  background-color: darkturquoise;
-}
-
-.button2:hover {
-  color: azure;
-  background-color: darkturquoise;
-}
-
-.button-holder {
-  content: center;
-  margin: 0;
-  display: flex;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 20vh;
-  max-width: 50vh;
-}
-
-.pad {
-  padding-left: 2vh;
-  padding-right: 2vh;
-}
-
-.support-image {
-  height: 30vh;
-  padding: 5vh;
-  justify-content: left;
+.pad-image-input {
+  padding-top: 20vh;
 }
 
 .labelClass {
   color: black;
   background-color: black;
+}
+
+.style-select-image {
+  max-height:30vh;
+  border-radius: 12px;
+  padding: 2vh;
+}
+
+.layer-container {
+  .layer-text-box {
+    border: 2px solid azure;
+    min-width: fit-content;
+    width: 10vh;
+    justify-content: center;
+  }
+}
+
+.model-item-container {
+  align-items: center !important;
+  justify-content: center !important;
+  align-content: center !important;
+  padding: 2vh;
+
+  .layer-text-box {
+    background-color: #24323d;
+    color: azure;
+    padding: 5px;
+    min-width: fit-content;
+    width: 10vh;
+    border: 1px solid azure;
+    border-radius: 1px;
+  }
+
+  .layer-text-box:hover {
+    background-color: #52708a;
+  }
+}
+
+.wrap {
+  flex-direction: column !important;
+  justify-content: center !important;
+  vertical-align: middle;
+  align-items: center !important;
+}
+
+.input-text-box {
+  size: 200%;
+  font-size: 26px;
+  max-width: 15vh;
+  padding: 1vh 2vh;
+  text-align: center;
+  background-color: #adbecc;
+  border-radius: 5px;
+  border: 2px solid #374a5c !important;
+}
+
+// step-progress bubble
+._2kL0S {
+  background-color: #49637a !important;
+}
+// step-progress bubble done
+._2JvrO {
+  background-color: #00a5a7 !important;
+}
+// step-progress content padding to center "previous"/"next" button container
+._2_g61 {
+  height: 30vh;  
+}
+// "previous" button
+._3CDiP {
+  border-width: 1px;
+  &:hover{
+    background-color: #24323d;
+  }
+}
+// "next" button
+._hsN1w {
+  background-color: #49637a !important;
+  border-color: #00a5a7 !important;
+  border-width: 1px;
+  &:hover {
+    background-color: #24323d !important;
+  }
 }
