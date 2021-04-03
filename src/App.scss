@@ -177,6 +177,10 @@ $secondary_8: #00292a;
   align-content: center !important;
   padding: 2vh;
 
+  .layer-text-box:hover {
+    background-color: primary_6;
+  }
+
   .layer-text-box {
     background-color: $primary_1;
     color: azure;
@@ -187,9 +191,7 @@ $secondary_8: #00292a;
     border-radius: 1px;
   }
 
-  .layer-text-box:hover {
-    background-color: primary_6;
-  }
+  
 }
 
 .wrap {
@@ -207,7 +209,10 @@ $secondary_8: #00292a;
   background-color: $primary_9;
   border-radius: 5px;
   border: 2px solid $primary_3 !important;
-  
+}
+
+.select-style {
+  width: 20vh;
 }
 
 // step-progress bubble
