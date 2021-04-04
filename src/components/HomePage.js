@@ -1,22 +1,13 @@
-import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom'; 
-import DesignIdForm from './DesignIdForm';
+import React from 'react';
+import { Link } from 'react-router-dom'; 
 
 export const HomePage = () => {
     
-    const [designId, setDesignId] = useState([])
-
-    const validateDesignId = () => {
-        
-    }
-
     return(
-        <div className="button-container">
-            <Link to="/model" className="button button1">Start</Link>
-            <div><br></br></div>
-            <div><p>OR</p></div>
-            <div><br></br></div>
-            <DesignIdForm value={designId} onFormChange={(v) => {setDesignId(v)}} validate={validateDesignId}/>
+        <div className="pad-block">
+            <Link to="/new_design" className="button button1">Start</Link>
+            <p className="pad-text">OR</p>
+            <Link to="/resume_design" className="button button2">Continue</Link>
         </div>
     )
 }

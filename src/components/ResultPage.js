@@ -9,7 +9,7 @@ const ImageWrapper = ({src, title}) => (
 
 const ResultPage = () => (
   <div className="cards">
-    <ImageWrapper src="http://localhost:5000/input/test.jpg" title="BEFORE" />
+    <ImageWrapper src="http://localhost:3000/input/test.jpg" title="BEFORE" />
     <ImageWrapper src="http://localhost:3000/output/test.jpg" title="AFTER" />
   </div>
 )

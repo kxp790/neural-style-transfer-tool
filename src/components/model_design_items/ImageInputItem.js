@@ -2,7 +2,7 @@ import React from 'react';
 import ImageForm from './ImageForm';
 
 const ImageInputItem = () => (
-  <div className="pad-image-input">
+  <div className="pad-block">
       <ImageForm />
   </div>
 )
