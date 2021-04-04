@@ -177,10 +177,6 @@ $secondary_8: #00292a;
   align-content: center !important;
   padding: 2vh;
 
-  .layer-text-box:hover {
-    background-color: primary_6;
-  }
-
   .layer-text-box {
     background-color: $primary_1;
     color: azure;
@@ -191,7 +187,9 @@ $secondary_8: #00292a;
     border-radius: 1px;
   }
 
-  
+  .layer-text-box:hover {
+    background-color: $primary_6;
+  }
 }
 
 .wrap {
@@ -217,11 +215,11 @@ $secondary_8: #00292a;
 
 // step-progress bubble
 ._2kL0S {
-  background-color: primary_5 !important;
+  background-color: $primary_5 !important;
 }
 // step-progress bubble done
 ._2JvrO {
-  background-color: secondary_2 !important;
+  background-color: $secondary_2 !important;
 }
 // step-progress content padding to center "previous"/"next" button container
 ._2_g61 {
@@ -236,8 +234,8 @@ $secondary_8: #00292a;
 }
 // "next" button
 ._hsN1w {
-  background-color: primary_5 !important;
-  border-color: secondary_2 !important;
+  background-color: $primary_5 !important;
+  border-color: $secondary_2 !important;
   border-width: 1px;
   &:hover {
     background-color: $primary_1 !important;

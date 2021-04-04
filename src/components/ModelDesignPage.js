@@ -3,11 +3,11 @@ import { AppContext } from './AppContext';
 import StepProgressBar from 'react-step-progress';
 import 'react-step-progress/dist/index.css';
 
-import ContentLayerSelectionItem from './ContentLayerSelectionItem';
-import ImageInputItem from './ImageInputItem';
-import ParameterSelectionItem from './ParameterSelectionItem';
-import StyleLayerSelectionItem from './StyleLayerSelectionItem';
-import StyleSelectionItem from './StyleSelectionItem';
+import ContentLayerSelectionItem from './model_design_items/ContentLayerSelectionItem';
+import ImageInputItem from './model_design_items/ImageInputItem';
+import ParameterSelectionItem from './model_design_items/ParameterSelectionItem';
+import StyleLayerSelectionItem from './model_design_items/StyleLayerSelectionItem';
+import StyleSelectionItem from './model_design_items/StyleSelectionItem';
  
 const ModelDesignPage = () => {
     const design = useContext(AppContext);

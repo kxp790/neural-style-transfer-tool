@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { AppContext } from './components/AppContext';
 
-import ContentLayerSelectionItem from './components/ContentLayerSelectionItem';
+import ContentLayerSelectionItem from './components/model_design_items/ContentLayerSelectionItem';
 import Header from './components/Header';
 import HomePage from './components/HomePage';
-import ImageInputItem from './components/ImageInputItem';
+import ImageInputItem from './components/model_design_items/ImageInputItem';
 import ModelDesignPage from './components/ModelDesignPage';
-import ParameterSelectionItem from './components/ParameterSelectionItem';
+import ParameterSelectionItem from './components/model_design_items/ParameterSelectionItem';
 import ResultPage from './components/ResultPage';
 import SupportPage from './components/SupportPage';
-import StyleLayerSelectionItem from './components/StyleLayerSelectionItem';
-import StyleSelectionItem from './components/StyleSelectionItem';
+import StyleLayerSelectionItem from './components/model_design_items/StyleLayerSelectionItem';
+import StyleSelectionItem from './components/model_design_items/StyleSelectionItem';
 
 import './App.scss';
 

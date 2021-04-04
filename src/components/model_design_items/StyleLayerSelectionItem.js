@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AppContext } from './AppContext';
+import { AppContext } from '../AppContext';
 
 export const StyleLayerSelectionItem = () => {
     const design = useContext(AppContext)

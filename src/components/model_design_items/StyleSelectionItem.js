@@ -1,8 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
-import style_1 from '../images/placeholder.png';
-import style_2 from '../images/stained-glass.jpg';
-import style_3 from '../images/placeholder.png';
+import style_1 from '../../images/placeholder.png';
+import style_2 from '../../images/stained-glass.jpg';
+import style_3 from '../../images/placeholder.png';
 
 const StyleSelectionItem = () => {
     const styles = [
