@@ -30,3 +30,5 @@ def make_sample_data():
         'pin' : 1234
     }
     pins_collection.insert_one(pins_data)
+
+make_sample_data()
