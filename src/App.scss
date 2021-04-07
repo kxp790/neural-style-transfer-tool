@@ -104,7 +104,7 @@ $secondary_8: #00292a;
   text-decoration: none;
   display: inline;
   flex-direction: row;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 12px 16px;
   width: 15vh;
   min-width: fit-content;
@@ -132,6 +132,8 @@ $secondary_8: #00292a;
     color: azure;
     background-color: darkturquoise;
   }
+
+  &.button:active {}
 }
 
 .pad-top {

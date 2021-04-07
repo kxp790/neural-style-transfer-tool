@@ -1,12 +1,14 @@
 import json
 import os
 import time
+from random import choices
 from pathlib import Path
 from shutil import copyfile
+from string import ascii_lowercase, digits
 
 from bson import json_util
 from flask import Flask, flash, redirect, request, send_file, session, url_for, jsonify
-from flask_cors import CORS
+from flask_cors import cross_origin, CORS
 from flask_pymongo import PyMongo
 from werkzeug.utils import secure_filename
 from copy import deepcopy
@@ -56,8 +58,22 @@ pin_data_default = {
     'pin': 1234
 }
 
+# design id length
+design_id_length = 6
+
+def get_random_design_id():
+    return ''.join(choices(ascii_lowercase + digits, k=design_id_length))
+
 def get_new_design_id():
-    return 'testestest'
+    random_string = get_random_design_id()
+    unique = False
+    while not (unique):
+        result = check_design_id(random_string)
+        if (result == False):
+            unique = True
+        else:
+            random_string = get_random_design_id()
+    return random_string
 
 # receive image and style it
 @app.route('/', methods=['POST'])
@@ -101,10 +117,11 @@ def home(design_id):
 @app.route('/check_design_id/<string:design_id>')
 def check_design_id(design_id):
     design = db.designs.find_one({"id": design_id})
-    return (json.loads(json_util.dumps(design.id)) == 'design_id')
+    return (design is not None) 
     
-# insert new design
+# insert new design  
 @app.route('/create_design')
+@cross_origin()
 def create_design():
     # create new unique design_id
     design_id = get_new_design_id()
@@ -117,6 +134,6 @@ def create_design():
     pin_data.update(id=design_id)
     db.pins.insert_one(pin_data)
     # return id of the created design
-    data = {'id': ''}
-    data.update(id=design_id)
-    return jsonify(data)
+    design_id_data = {'id': ''}
+    design_id_data.update(id=design_id)
+    return jsonify(design_id_data)

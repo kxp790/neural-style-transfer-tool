@@ -9,7 +9,7 @@ export const StyleLayerSelectionItem = () => {
         <div className="model-item-container">
             <AppContext.Consumer>
                 {({layers}) => (
-                <div className="layer-container">
+                <div>
                     <p>{layers.map(layer => <div className="box-container"><p className="box layer-box">{layer}</p><input className="box weight-box"></input></div>)}</p>
                 </div>
                 )}
@@ -18,4 +18,4 @@ export const StyleLayerSelectionItem = () => {
     )
 }
 
-export default StyleLayerSelectionItem;
+export default StyleLayerSelectionItem

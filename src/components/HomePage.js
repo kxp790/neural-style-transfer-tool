@@ -1,28 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom'; 
-// import APIClient from '../apiClient';
 import axios from 'axios';
+import { AppContext } from './AppContext';
 
 export const HomePage = () => {
 
-    const [designId, setDesignId] = useState(); 
-    // const [client, setClient] = useState();
-
-    // useEffect(() => {
-    //     setClient(new APIClient());
-    // }, [])
-    
-    // const makeNewDesign = () => {
-    //     const id = 'asdfafegaeg'
-    //     this.apiClient.createDesign().then((data) =>
-    //         setDesignId({...this.state, kudos: data})
-    //     );
-    // }
+    const {setDesignId} = useContext(AppContext)
 
     async function makeNewDesign () {
-        axios.get('http://localhost:5000/create_design', {})
+        axios.get('http://localhost:5000/create_design', {}, {
+            headers: {
+                'Access-Control-Allow-Origin': 'http://localhost:3000'
+            }
+        })
         .then(function (response) {
-            console.log(response)
+            setDesignId(response.data.id)
         })
     }
 

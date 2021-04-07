@@ -10,15 +10,15 @@ import StyleLayerSelectionItem from './model_design_items/StyleLayerSelectionIte
 import StyleSelectionItem from './model_design_items/StyleSelectionItem';
  
 const ModelDesignPage = () => {
-    const design = useContext(AppContext);
+    const design = useContext(AppContext)
     console.log(design)
     
     // setup the step content
-    const imageInput = <ImageInputItem />;
-    const styleSelection = <StyleSelectionItem />;
-    const contentLayerSelection = <ContentLayerSelectionItem />;
-    const styleLayerSelection = <StyleLayerSelectionItem />;
-    const parameterSelection = <ParameterSelectionItem />;
+    const imageInput = <ImageInputItem />
+    const styleSelection = <StyleSelectionItem />
+    const contentLayerSelection = <ContentLayerSelectionItem />
+    const styleLayerSelection = <StyleLayerSelectionItem />
+    const parameterSelection = <ParameterSelectionItem />
     
     // setup step validators, will be called before proceeding to the next step
     const styleSelectionValidator = () => {
@@ -39,7 +39,7 @@ const ModelDesignPage = () => {
     
     const onFormSubmit = () => {
         // submit logic when "submit" is pressed
-        window.location.replace('http://localhost:3000/result');
+        window.location.replace('http://localhost:3000/result')
     }
     
     // render the progress bar
@@ -81,4 +81,4 @@ const ModelDesignPage = () => {
     )
 }
 
-export default ModelDesignPage;
+export default ModelDesignPage
