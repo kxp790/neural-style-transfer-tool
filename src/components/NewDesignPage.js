@@ -5,7 +5,7 @@ import { AppContext } from './AppContext';
 const NewDesignPage = () => {
 
     const savePin = () => {
-
+        
     }
 
     return(

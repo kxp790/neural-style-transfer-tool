@@ -14,6 +14,7 @@ export const HomePage = () => {
             }
         })
         .then(function (response) {
+            console.log(response.data)
             setDesignId(response.data.id)
         })
     }
