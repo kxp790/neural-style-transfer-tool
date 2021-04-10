@@ -9,7 +9,7 @@ pins_collection = style_transfer_db['pins']
 
 def make_sample_data():
     designs_data = {
-        'id' : 'af2iak2jh3',
+        'id' : 'af2iak',
         'style_image_name' : 'stained-glass.jpg',
         'content_layer' : 'block4_conv2',
         'style_layers' : {

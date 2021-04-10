@@ -180,7 +180,6 @@ body {
   padding: 2vh;
 }
 
-
 .model-item-container {
   padding: 2vh;
   width: 800px;
@@ -221,11 +220,18 @@ body {
 .input-text-box {
   font-size: 26px;
   width: 20vh;
-  padding: 1vh 2vh;
+  min-width: 15vh;
+  padding: 0.5vh 1vh;
   text-align: center;
   background-color: $primary_10;
   border-radius: 5px;
   border: 2px solid $primary_3 !important;
+  margin: 0 auto;
+}
+
+.caption-box {
+  width: 20vh;
+  padding: 1vh 2vh;
   margin: 0 auto;
 }
 
