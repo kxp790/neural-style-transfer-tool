@@ -10,13 +10,6 @@ const ParameterSelectionItem = () => {
             <p>Content weight</p>
             <p>Style Weight</p>
             <p>Number of iterations</p>
-            {/* <AppContext.Consumer>
-                {({design}) => (
-                <div >
-                    <p>{design.map(parameter => <p>{parameter}</p>)}</p>
-                </div>
-                )}
-            </AppContext.Consumer> */}
         </div>
     )
 }

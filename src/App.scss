@@ -149,6 +149,10 @@ body {
   padding-bottom: 2vh;
 }
 
+.pad-top-bottom {
+  padding: 0.5vh 0vh;
+}
+
 .pad-sides {
   padding: 0vh 1vh;
 }
@@ -181,7 +185,7 @@ body {
 }
 
 .model-item-container {
-  padding: 2vh;
+  padding: 5vh;
   width: 800px;
   margin: 0 auto;
 
@@ -221,7 +225,7 @@ body {
   font-size: 26px;
   width: 20vh;
   min-width: 15vh;
-  padding: 0.5vh 1vh;
+  padding: 1vh 1vh;
   text-align: center;
   background-color: $primary_10;
   border-radius: 5px;
@@ -239,12 +243,66 @@ body {
   width: 20vh;
 }
 
-.layer-weight {
+.style-layer-weight {
   margin: 0 auto;
-  padding: 5px 15px;
+  padding: 1px;
+  min-width: fit-content;
+  
+  .cell-width {
+    width: 20vh;
+    min-width: fit-content;
+  }
+
+  .layer-box {
+    background-color: transparent;
+    color: azure;
+    min-width: fit-content;
+    text-shadow: 1px 1px black;
+    padding: 0.5vh;
+    cursor: "pointer";
+    font-size: 16px !important;
+  }
+
+  .weight-box {
+    font-size: 16px;
+    width: 3vh !important;
+    min-width: fit-content;
+    padding: 0.5vh;
+    text-align: center;
+    background-color: $primary_10;
+    border-radius: 5px;
+    border: 2px solid;
+    font-size: 16px !important;
+  }
 
   &.enabled {
-    background-color: rgba(255, 255, 255, 0.25);
+    background-color: $primary_7;
+    box-shadow: 1px 1px black;
+  }
+}
+
+.content-layer {
+  background-color: transparent;
+  color: azure;
+  padding: 1vh;
+  margin: 0 auto;
+  width: 20vh;
+  min-width: fit-content;
+
+  .layer-box {
+    border: 0px solid transparent;
+    min-width: fit-content;
+    justify-content: center;
+    width: 15vh;
+    border-radius: 2px;
+    cursor: pointer;
+    text-shadow: 1px 1px black;
+    font-size: 16px !important;
+  }
+  
+  &.enabled {
+    background-color: $primary_7;
+    box-shadow: 1px 1px black;
   }
 }
 
@@ -276,3 +334,4 @@ body {
     background-color: $primary_1 !important;
   }
 }
+// progress bar text

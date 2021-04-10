@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { AppContext } from './components/AppContext';
 
@@ -30,7 +30,7 @@ const App = () => {
           <Header />
           {1 == 2 ? (<Redirect to="/" />) : (
             <Switch>
-              <Route path="/" exact children={<HomePage design={designId, setDesign} />} />
+              <Route path="/" exact children={HomePage} />
               <Route path="/new_design" exact component={NewDesignPage} />
               <Route path="/resume_design" exact component={ResumeDesignPage}/>
               <Route path="/model" exact component={ModelDesignPage} />

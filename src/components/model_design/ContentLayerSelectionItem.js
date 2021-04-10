@@ -1,20 +1,46 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../AppContext';
+import React, { useContext, useState } from 'react';
+import { ModelDesignContext } from './ModelDesignContext';
+
+const ContentLayer = (props) => {
+    const [ isEnabled, setIsEnabled ] = useState(false)
+
+    return (
+        <table className={props.isEnabled ? "content-layer enabled" : "content-layer"}>
+            <tr>
+                <td>
+                    <text className="layer-box" onClick={props.onPick}>{props.layer}</text>
+                </td>
+            </tr>
+        </table>
+    )
+}
 
 const ContentLayerSelectionItem = () => {
-    const design = useContext(AppContext)
-    const layers = useContext(AppContext)
+    const [isEnabled, setIsEnabled] = useState(false)
+    const {selectedContentLayer, setSelectedContentLayer} = useContext(ModelDesignContext)
+    console.log("Selected content layer:")
+    console.log(selectedContentLayer)
+
+    const toggleLayer = (event) => {
+        if(event.target.innerText != selectedContentLayer) {
+            setSelectedContentLayer(event.target.innerText)
+            console.log("Toggle Layer:")
+            console.log(event.target.innerText)
+        }
+    }
 
     return (
         <div className="model-item-container">
-            <br></br>
-            <AppContext.Consumer>
+            <ModelDesignContext.Consumer>
                 {({layers}) => (
                     <div>
-                        {layers.map(layer => <p className="layer-text-box">{layer}</p>)}
+                        {layers.map(layer => <ContentLayer 
+                            onPick={(event) => toggleLayer(event)}
+                            isEnabled={(selectedContentLayer == layer)} 
+                            layer={layer} />)}
                     </div>
                 )}
-            </AppContext.Consumer>
+            </ModelDesignContext.Consumer>
         </div> 
     )
 }

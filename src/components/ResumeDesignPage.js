@@ -6,12 +6,10 @@ const DesignIdForm = ({ onDesignIdChange, onPinChange, validate }) => {
 
     const handleDesignIdChange = (event) => {
         onDesignIdChange(event.target.value)
-        console.log(event.target.value)
     }
 
     const handlePinChange = (value) => {
         onPinChange(value)
-        console.log(value)
     }
 
     return(

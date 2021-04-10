@@ -5,7 +5,7 @@ import PropagateLoader from 'react-spinners/PropagateLoader'
 const ImageWrapper = ({src, title}) => (
     <div className="img-wrapper">
       <p>{title}</p>
-      <img src={src} />
+      <img src={src} alt="" />
     </div>
 )
 

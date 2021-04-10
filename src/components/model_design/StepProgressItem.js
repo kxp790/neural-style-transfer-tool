@@ -4,7 +4,6 @@ import StepProgressBar from 'react-step-progress';
 import 'react-step-progress/dist/index.css';
 import axios from 'axios';
 import { AppContext } from '../AppContext';
-import { ModelDesignContext } from './ModelDesignContext';
 
 import ContentLayerSelectionItem from './ContentLayerSelectionItem';
 import ImageInputItem from './ImageInputItem';
@@ -15,10 +14,7 @@ import StyleSelectionItem from './StyleSelectionItem';
  
 const StepFunctionItem = (props) => {
     const {design} = useContext(AppContext)
-    console.log(design)
     
-    const { selectedLayers, setSelectedLayers } = useContext(ModelDesignContext)
-
     // setup the step content
     const imageInput = <ImageInputItem />
     const styleSelection = <StyleSelectionItem />
@@ -82,13 +78,13 @@ const StepFunctionItem = (props) => {
             validator: styleSelectionValidator
             },
             {
-            label: 'Content Layer Selection',
+            label: 'Content Layer',
             name: 'step 3',
             content: contentLayerSelection,
             validator: contentLayerSelectionValidator
             },
             {
-            label: 'Style Layers Selection',
+            label: 'Style Layers',
             name: 'step 4',
             content: styleLayerSelection,
             validator: styleLayerSelectionValidator
