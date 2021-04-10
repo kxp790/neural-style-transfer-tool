@@ -17,6 +17,7 @@ export const HomePage = ({history}) => {
         })
         .then(function (response) {
             console.log(response.data)
+            setDesign(response.data)
         })
     }
 

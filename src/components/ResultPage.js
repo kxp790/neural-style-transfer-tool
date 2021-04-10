@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+
+import PropagateLoader from 'react-spinners/PropagateLoader'
 
 const ImageWrapper = ({src, title}) => (
     <div className="img-wrapper">
@@ -7,11 +9,17 @@ const ImageWrapper = ({src, title}) => (
     </div>
 )
 
-const ResultPage = () => (
-  <div className="cards">
+const ResultPage = () => {
+  const [ loading, setLoading ] = useState(false)
+
+  return (
+    loading ? <PropagateLoader /> : <div className="cards">
     <ImageWrapper src="http://localhost:3000/input/test.jpg" title="BEFORE" />
     <ImageWrapper src="http://localhost:3000/output/test.jpg" title="AFTER" />
   </div>
-)
+      )
+
+  
+}
 
 export default ResultPage

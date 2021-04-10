@@ -1,84 +1,32 @@
-import React, { useContext } from 'react';
-import { AppContext } from './AppContext';
-import StepProgressBar from 'react-step-progress';
-import 'react-step-progress/dist/index.css';
+import React, { useState, useContext } from 'react'
+import { ModelDesignContext } from './model_design/ModelDesignContext'
+import { AppContext } from './AppContext'
+import StepFunctionItem from './model_design/StepFunctionItem'
 
-import ContentLayerSelectionItem from './model_design_items/ContentLayerSelectionItem';
-import ImageInputItem from './model_design_items/ImageInputItem';
-import ParameterSelectionItem from './model_design_items/ParameterSelectionItem';
-import StyleLayerSelectionItem from './model_design_items/StyleLayerSelectionItem';
-import StyleSelectionItem from './model_design_items/StyleSelectionItem';
- 
-const ModelDesignPage = () => {
-    const design = useContext(AppContext)
-    console.log(design)
-    
-    // setup the step content
-    const imageInput = <ImageInputItem />
-    const styleSelection = <StyleSelectionItem />
-    const contentLayerSelection = <ContentLayerSelectionItem />
-    const styleLayerSelection = <StyleLayerSelectionItem />
-    const parameterSelection = <ParameterSelectionItem />
-    
-    // setup step validators, will be called before proceeding to the next step
-    const styleSelectionValidator = () => {
-        return true
-    }
-    
-    const contentLayerSelectionValidator = () =>  {
-        return true
-    }
-    
-    const styleLayerSelectionValidator = () => {
-        return true
+export const ModelDesignPage = () => {
+    const { design, layers } = useContext(AppContext)
+
+    var initialWeights = {}
+    layers.forEach (layer => {
+        initialWeights[layer] = '0.1'
+    })
+    Object.entries(design.style_layers).forEach(weight => {
+        initialWeights[weight.key] = weight.value
+    });
+
+    const [ styleLayerWeights, setStyleLayerWeights ] = useState(initialWeights)
+    const [ selectedLayers, setSelectedLayers ] = useState(Object.keys(design.style_layers))
+
+    const setStyleLayerWeight = (layer, weight) => {
+        setStyleLayerWeights({
+            ...styleLayerWeights,
+            [layer]: weight
+        })
     }
 
-    const parameterSelectionValidator = () => {
-        return true
-    }
-    
-    const onFormSubmit = () => {
-        // submit logic when "submit" is pressed
-        window.location.replace('http://localhost:3000/result')
-    }
-    
-    // render the progress bar
     return (
-        <StepProgressBar
-        startingStep={0}
-        onSubmit={onFormSubmit}
-        steps={[
-            {
-            label: 'Image Upload',
-            name: 'step 1',
-            content: imageInput
-            },
-            {
-            label: 'Style Selection',
-            name: 'step 2',
-            content: styleSelection,
-            validator: styleSelectionValidator
-            },
-            {
-            label: 'Content Layer Selection',
-            name: 'step 3',
-            content: contentLayerSelection,
-            validator: contentLayerSelectionValidator
-            },
-            {
-            label: 'Style Layers Selection',
-            name: 'step 4',
-            content: styleLayerSelection,
-            validator: styleLayerSelectionValidator
-            },
-            {
-            label: 'Other Parameters',
-            name: 'step 5',
-            content: parameterSelection,
-            validator: parameterSelectionValidator
-            }
-        ]}/>
+        <ModelDesignContext.Provider value={{selectedLayers, setSelectedLayers, styleLayerWeights, setStyleLayerWeight}}>
+            <StepFunctionItem />
+        </ModelDesignContext.Provider>
     )
 }
-
-export default ModelDesignPage

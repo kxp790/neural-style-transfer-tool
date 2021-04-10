@@ -19,7 +19,7 @@ const DesignIdForm = ({ onDesignIdChange, onPinChange, validate }) => {
         <form>
             <h4>INSERT DESIGN ID AND PIN:</h4>
             <div className="pad-bottom">
-                <input type="text" placeholder="DESIGN ID" initialValue="" className="input-text-box" required onChange={handleDesignIdChange} />
+                <input className="input-text-box" type="text" placeholder="DESIGN ID" placeholder="DESIGN ID" required onChange={handleDesignIdChange} />
             </div>
             <PinInput 
                 className="pad-text"
@@ -28,13 +28,15 @@ const DesignIdForm = ({ onDesignIdChange, onPinChange, validate }) => {
                 type="numeric" 
                 inputMode="number"
                 style={{paddingBottom: "2vh"}}
-                inputStyle={{borderRadius: "4px", border: "2px solid #374a5c", backgroundColor: "#9db0c2", fontSize: "16px"}}
+                inputStyle={{borderRadius: "4px", border: "2px solid #374a5c", backgroundColor: "#9db0c2", fontSize: "50px !important"}}
                 inputFocusStyle={{borderRadius: "4px", backgroundColor: "#52708a"}}
                 onComplete={(value) => {handlePinChange(value)}}
                 autoSelect={true}
-                regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
+                regexCriteria={/^[0-9]*$/}
             />
-            <input type="submit" to="/model" className="button button2" value="Continue" onClick={validate} />
+            <input type="submit" to="/model" className="button button2" value="Edit model" onClick={validate} />
+            <text className="pad-sides">OR</text>
+            <input type="submit" to="/result" className="button button1" value="See results" onClick={validate} />
         </form>
     )
 }

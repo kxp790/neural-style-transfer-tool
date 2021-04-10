@@ -9,4 +9,7 @@ What is not allowed?
 ✕	Don't redistribute or sell someone else's Pixabay images or videos on other stock or wallpaper platforms.
 ✕	Don't sell unaltered copies of an image. e.g. sell an exact copy of a stock photo as a poster, print or on a physical product.
 ✕	Don't portray identifiable people in a bad light or in a way that is offensive.
-✕	Don't use images with identifiable brands to create a misleading association with a product or service.
+✕   Don't use images with identifiable brands to create a misleading association with a product or service.
+
+URLs of used images:
+-   https://pixabay.com/photos/stained-glass-window-glass-63204/

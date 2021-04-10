@@ -99,7 +99,7 @@ def save_image():
 @cross_origin()
 def style_transfer(design_id):
     model.style_transfer(image_name, 'stained-glass')
-    return 200
+    return '200'
 
 # get input image
 @app.route('/input/<string:image_name>', methods=['GET'])
@@ -129,7 +129,7 @@ def check_design_id(design_id):
 def update_design():
     # updated_design = request.data['updated_design']
     # db.designs.find_one_and_update({'id': updated_design['id']}, {})
-    return 200
+    return '200'
     
 # insert new design  
 @app.route('/create_design')
@@ -146,5 +146,5 @@ def create_design():
     pin_data.update(id=design_id)
     db.pins.insert_one(pin_data)
     # return created design without Object id
-    del design_data['_id']
+    design_data['_id'] = ''
     return design_data

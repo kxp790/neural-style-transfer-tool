@@ -18,13 +18,19 @@ $secondary_6: #005254;
 $secondary_7: #003e3f;
 $secondary_8: #00292a;
 
+body {
+  background-image: url("images/background.png");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
 .App {
   text-align: center;
   align-items: center;
-  background-color: #4a4c50;
-  background-image: url("images/background.png");
+  
   color: azure;
   height: 100vh;
+  
 }
 
 .App-header {
@@ -106,7 +112,8 @@ $secondary_8: #00292a;
   flex-direction: row;
   border-radius: 8px;
   padding: 12px 16px;
-  width: 15vh;
+  min-width: fit-content;
+  width: 10vh;
   min-width: fit-content;
   font-size: 16px !important;
   border: 2px solid;
@@ -132,8 +139,6 @@ $secondary_8: #00292a;
     color: azure;
     background-color: darkturquoise;
   }
-
-  &.button:active {}
 }
 
 .pad-top {
@@ -142,6 +147,10 @@ $secondary_8: #00292a;
 
 .pad-bottom {
   padding-bottom: 2vh;
+}
+
+.pad-sides {
+  padding: 0vh 1vh;
 }
 
 .pad-style-image {
@@ -174,7 +183,7 @@ $secondary_8: #00292a;
 
 .model-item-container {
   padding: 2vh;
-  width: 20vh;
+  width: 800px;
   margin: 0 auto;
 
   .box-container {
@@ -222,6 +231,15 @@ $secondary_8: #00292a;
 
 .select-style {
   width: 20vh;
+}
+
+.layer-weight {
+  margin: 0 auto;
+  padding: 5px 15px;
+
+  &.enabled {
+    background-color: rgba(255, 255, 255, 0.25);
+  }
 }
 
 // step-progress bubble
