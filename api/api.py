@@ -75,9 +75,9 @@ def get_new_design_id():
             random_string = get_random_design_id()
     return random_string
 
-# receive image and style it
+# save image
 @app.route('/', methods=['POST'])
-def output_file():
+def save_image():
     if request.method == 'POST':
         # check if has the file
         if 'file' not in request.files:
@@ -92,10 +92,14 @@ def output_file():
         if file:
             file.save(os.path.join(app.config['INPUT_FOLDER'], image_name))
             copyfile(INPUT_FOLDER + '/' + image_name, OUTPUT_FOLDER + '/' + image_name)
-            # get styled image
-            model.style_transfer(image_name, 'stained-glass')
-            # redirect when done
-            return redirect('http://localhost:3000/result')
+            return True
+
+# receive image and style it
+@app.route('/style_transfer/<string:design_id>')
+@cross_origin()
+def style_transfer(design_id):
+    model.style_transfer(image_name, 'stained-glass')
+    return 200
 
 # get input image
 @app.route('/input/<string:image_name>', methods=['GET'])
@@ -118,6 +122,14 @@ def home(design_id):
 def check_design_id(design_id):
     design = db.designs.find_one({"id": design_id})
     return (design is not None) 
+
+# update existing design
+@app.route('/update_design')
+@cross_origin()
+def update_design():
+    # updated_design = request.data['updated_design']
+    # db.designs.find_one_and_update({'id': updated_design['id']}, {})
+    return 200
     
 # insert new design  
 @app.route('/create_design')
@@ -133,7 +145,6 @@ def create_design():
     pin_data = deepcopy(pin_data_default)
     pin_data.update(id=design_id)
     db.pins.insert_one(pin_data)
-    # return id of the created design
-    design_id_data = {'id': ''}
-    design_id_data.update(id=design_id)
-    return jsonify(design_id_data)
+    # return created design without Object id
+    del design_data['_id']
+    return design_data
