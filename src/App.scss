@@ -117,6 +117,7 @@ body {
   min-width: fit-content;
   font-size: 16px !important;
   border: 2px solid;
+  text-shadow: 1px 1px $primary_1;
 
   &.button1 {
     color: azure;
@@ -173,16 +174,10 @@ body {
   padding: 2vh;
 }
 
-.labelClass {
-  color: black;
-  background-color: black;
-}
-
-.style-select-image {
-  max-height:30vh;
-  border-radius: 12px;
-  padding: 2vh;
-}
+// .labelClass {
+//   color: black;
+//   background-color: black;
+// }
 
 .model-item-container {
   padding: 5vh;
@@ -243,6 +238,69 @@ body {
   width: 20vh;
 }
 
+.style-image-table {
+  width: 50vh;
+  margin: 0 auto;
+
+  .style-image-cell {
+    padding: 2vh;
+
+    .style-image {
+      width: 20vh !important;  
+      height: 20vh !important;
+    }
+
+    &.enabled {
+      background-color: $primary_7;
+      box-shadow: 1px 1px $primary_1;
+    }
+  }
+}
+
+.style-image-card {
+  background-color: transparent;
+  color: azure;
+  padding: 1vh;
+  margin: 0 auto;
+  border-radius: 12px;
+  padding: 2vh;
+
+  .style-image {
+    max-width: 100px !important;  
+    max-height: 100px !important;
+
+    &.enabled {
+      background-color: $primary_7;
+      box-shadow: 1px 1px $primary_1;
+    }
+  }
+}
+
+.content-layer {
+  background-color: transparent;
+  color: azure;
+  padding: 1vh;
+  margin: 0 auto;
+  width: 20vh;
+  min-width: fit-content;
+
+  .layer-box {
+    border: 0px solid transparent;
+    min-width: fit-content;
+    justify-content: center;
+    width: 15vh;
+    border-radius: 2px;
+    cursor: pointer;
+    text-shadow: 1px 1px $primary_1;
+    font-size: 16px !important;
+  }
+  
+  &.enabled {
+    background-color: $primary_7;
+    box-shadow: 1px 1px $primary_1;
+  }
+}
+
 .style-layer-weight {
   margin: 0 auto;
   padding: 1px;
@@ -257,7 +315,7 @@ body {
     background-color: transparent;
     color: azure;
     min-width: fit-content;
-    text-shadow: 1px 1px black;
+    text-shadow: 1px 1px $primary_1;
     padding: 0.5vh;
     cursor: "pointer";
     font-size: 16px !important;
@@ -277,32 +335,7 @@ body {
 
   &.enabled {
     background-color: $primary_7;
-    box-shadow: 1px 1px black;
-  }
-}
-
-.content-layer {
-  background-color: transparent;
-  color: azure;
-  padding: 1vh;
-  margin: 0 auto;
-  width: 20vh;
-  min-width: fit-content;
-
-  .layer-box {
-    border: 0px solid transparent;
-    min-width: fit-content;
-    justify-content: center;
-    width: 15vh;
-    border-radius: 2px;
-    cursor: pointer;
-    text-shadow: 1px 1px black;
-    font-size: 16px !important;
-  }
-  
-  &.enabled {
-    background-color: $primary_7;
-    box-shadow: 1px 1px black;
+    box-shadow: 1px 1px $primary_1;
   }
 }
 
@@ -321,8 +354,9 @@ body {
 // "previous" button
 ._3CDiP {
   border-width: 1px;
+  text-shadow: 1px 1px $primary_1;
   &:hover{
-    background-color: $primary_1;
+    background-color: $primary_1 !important;
   }
 }
 // "next" button
@@ -330,8 +364,12 @@ body {
   background-color: $primary_5 !important;
   border-color: $secondary_2 !important;
   border-width: 1px;
+  text-shadow: 1px 1px $primary_1;
   &:hover {
     background-color: $primary_1 !important;
   }
 }
-// progress bar text
+
+._1hzhf {
+  text-shadow: 1px 1px $primary_1;
+}

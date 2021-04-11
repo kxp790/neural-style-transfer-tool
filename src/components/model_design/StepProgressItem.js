@@ -72,19 +72,19 @@ const StepFunctionItem = (props) => {
             content: imageInput
             },
             {
-            label: 'Style Selection',
+            label: 'Select Style Image',
             name: 'step 2',
             content: styleSelection,
             validator: styleSelectionValidator
             },
             {
-            label: 'Content Layer',
+            label: 'Select Content Layer',
             name: 'step 3',
             content: contentLayerSelection,
             validator: contentLayerSelectionValidator
             },
             {
-            label: 'Style Layers',
+            label: 'Select Style Layers',
             name: 'step 4',
             content: styleLayerSelection,
             validator: styleLayerSelectionValidator

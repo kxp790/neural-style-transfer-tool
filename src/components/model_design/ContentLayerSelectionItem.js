@@ -18,16 +18,15 @@ const ContentLayer = (props) => {
 const ContentLayerSelectionItem = () => {
     const [isEnabled, setIsEnabled] = useState(false)
     const {selectedContentLayer, setSelectedContentLayer} = useContext(ModelDesignContext)
-    console.log("Selected content layer:")
-    console.log(selectedContentLayer)
-
+    
     const toggleLayer = (event) => {
         if(event.target.innerText != selectedContentLayer) {
             setSelectedContentLayer(event.target.innerText)
-            console.log("Toggle Layer:")
-            console.log(event.target.innerText)
         }
     }
+
+    console.log("SelectedContentLayer")
+    console.log(selectedContentLayer)
 
     return (
         <div className="model-item-container">
