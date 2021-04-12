@@ -39,13 +39,26 @@ const DesignIdForm = ({ onDesignIdChange, onPinChange, validate }) => {
     )
 }
 
-const ResumeDesignPage = () => {
-    const [inputDesignId, setInputDesignId] = useState('')
-    const [inputPin, setInputPin] = useState(1234)
+const ResumeDesignPage = ({ history }) => {
+    const [ inputDesignId, setInputDesignId ] = useState('')
+    const [ inputPin, setInputPin ] = useState(1234)
 
-    const validateInput = () => {
+    async function validateInput () {
         // TODO - send get request with desing to API with pin in body to see if that pair exists and either receive none or design
         // TODO - if none then display validation error, if design is returned then set context design and redirect to model 
+        history.push('/model')
+
+        axios.get('http://localhost:5000/check_design', {
+                'design_id': inputDesignId,
+                'pin': inputPin
+            }, {
+                headers: {
+                    'Access-Control-Allow-Origin': 'http://localhost:3000'
+                }
+        })
+        .then(function (response) {
+            console.log(response.data)
+        })
     }
 
     return (

@@ -3,9 +3,9 @@ import { withRouter, Link } from 'react-router-dom';
 import axios from 'axios';
 import { AppContext } from './AppContext';
 
-export const HomePage = ({history}) => {
+export const HomePage = ({ history }) => {
 
-    const {setDesign} = useContext(AppContext)
+    const { setDesign } = useContext(AppContext)
 
     async function makeNewDesign () {
         history.push('/new_design')

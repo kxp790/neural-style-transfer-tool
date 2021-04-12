@@ -12,8 +12,8 @@ import StyleLayerSelectionItem from './StyleLayerSelectionItem';
 import StyleSelectionItem from './StyleSelectionItem';
 
  
-const StepFunctionItem = (props) => {
-    const {design} = useContext(AppContext)
+const StepProgressItem = (props) => {
+    const { design } = useContext(AppContext)
     
     // setup the step content
     const imageInput = <ImageInputItem />
@@ -47,7 +47,7 @@ const StepFunctionItem = (props) => {
             }
         })
         .then(function (response) {
-            if(response.data == '200') {
+            if(response.data === '200') {
                 props.history.push('/result')
                 axios.get('http://localhost:5000/style_transfer/' + design.id, {}, {
                     headers: {
@@ -99,4 +99,4 @@ const StepFunctionItem = (props) => {
     )
 }
 
-export default withRouter(StepFunctionItem)
+export default withRouter(StepProgressItem)

@@ -14,7 +14,7 @@ const NewDesignPage = (props) => {
         <div className="pad-block">
             <AppContext.Consumer>
                 {({design}) => (
-                    design == null ? <PropogateLoader /> :
+                    design === undefined ? <PropogateLoader /> :
                     <>
                         <h4>YOUR DESIGN ID:</h4>
                         <h1 className="input-text-box">{design.id}</h1>

@@ -39,7 +39,7 @@ image_name = 'test.jpg'
 design_data_default = {
     'id' : '',
     'style_image_name' : '',
-    'content_layer' : '',
+    'content_layer' : 'block4_conv2',
     'style_layers' : {
         'block1_conv1': 0.2,
         'block2_conv1': 0.3,
@@ -47,7 +47,7 @@ design_data_default = {
         'block4_conv1': 0.10,
         'block5_conv1': 0.15
     },
-    'content_wight' : 2,
+    'content_weight' : 2,
     'style_weight' : 3,
     'iterations' : 50
 }
@@ -117,7 +117,15 @@ def home(design_id):
     design = db.designs.find_one({"id": design_id})
     return json.loads(json_util.dumps(design))
 
-# check excisting design id
+# check if design and pin combo exists
+@app.route('/check_design')
+def check_design_with_pin():
+    design_id = request.data['design_id']
+    pin = request.data['pin']
+    pin_from_db = db.pins.find_one({'id': design_id, 'pin': pin})
+    return '200' if (json.loads(json_util.dumps(pin_from_db))) else '400'
+
+# check if design id excists
 @app.route('/check_design_id/<string:design_id>')
 def check_design_id(design_id):
     design = db.designs.find_one({"id": design_id})

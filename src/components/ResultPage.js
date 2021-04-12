@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import PropagateLoader from 'react-spinners/PropagateLoader'
 
-const ImageWrapper = ({src, title}) => (
+const ImageWrapper = ({ src, title }) => (
     <div className="img-wrapper">
       <p>{title}</p>
       <img src={src} alt="" />

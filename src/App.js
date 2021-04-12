@@ -14,8 +14,8 @@ import { ModelDesignPage } from './components/ModelDesignPage';
 
 const App = () => {
 
-  const [designId, setDesignId] = useState('')
-  const [design, setDesign] = useState()
+  const [ designId, setDesignId ] = useState('')
+  const [ design, setDesign ] = useState()
   
   const layers = ['block1_conv1', 'block1_conv2', 
                   'block2_conv1', 'block2_conv2', 
@@ -28,7 +28,7 @@ const App = () => {
       <AppContext.Provider value={{designId, setDesignId, design, setDesign, layers}}>
         <div className="App">
           <Header />
-          {1 == 2 ? (<Redirect to="/" />) : (
+          {1 === 2 ? (<Redirect to="/" />) : (
             <Switch>
               <Route path="/" exact children={HomePage} />
               <Route path="/new_design" exact component={NewDesignPage} />
