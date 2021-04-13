@@ -16,6 +16,7 @@ export const HomePage = ({ history }) => {
             }
         })
         .then(function (response) {
+            delete response.data['_id']
             console.log(response.data)
             setDesign(response.data)
         })
