@@ -33,8 +33,8 @@ const DesignIdForm = ({ onDesignIdChange, onPinChange, validate }) => {
                 regexCriteria={/^[0-9]*$/}
             />
             <input type="submit" to="/model" className="button button2" value="Edit model" onClick={validate} />
-            <text className="pad-sides">/</text>
-            <input type="submit" to="/result" className="button button1" value="See results" onClick={validate} />
+            <p className="pad-sides">/</p>
+            <input type="submit" className="button button1" value="See results" onClick={(event) => validate(event)} />
         </form>
     )
 }
@@ -43,18 +43,19 @@ const ResumeDesignPage = ({ history }) => {
     const [ inputDesignId, setInputDesignId ] = useState('')
     const [ inputPin, setInputPin ] = useState(1234)
 
-    async function validateInput () {
+    async function validateInput (event) {
         // TODO - send get request with desing to API with pin in body to see if that pair exists and either receive none or design
         // TODO - if none then display validation error, if design is returned then set context design and redirect to model 
+        event.preventDefault();
         history.push('/model')
 
-        axios.get('http://localhost:5000/check_design', {
-                'design_id': inputDesignId,
-                'pin': inputPin
-            }, {
-                headers: {
-                    'Access-Control-Allow-Origin': 'http://localhost:3000'
-                }
+        axios.post('http://localhost:5000/check_design_with_pin', {
+            design_id: inputDesignId,
+            pin: inputPin
+        }, {
+            headers: {
+                'Access-Control-Allow-Origin': 'http://localhost:3000'
+        }
         })
         .then(function (response) {
             console.log(response.data)

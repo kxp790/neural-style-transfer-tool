@@ -10,7 +10,7 @@ export const HomePage = ({ history }) => {
     async function makeNewDesign () {
         history.push('/new_design')
 
-        axios.get('http://localhost:5000/create_design', {}, {
+        axios.get('http://localhost:5000/create_design', {
             headers: {
                 'Access-Control-Allow-Origin': 'http://localhost:3000'
             }
@@ -24,7 +24,7 @@ export const HomePage = ({ history }) => {
     return(
         <div className="pad-block">
             <button className="button button1" onClick={makeNewDesign}>Start</button>
-            <p className="pad-text">OR</p>
+            <p className="pad-sides">OR</p>
             <Link to="/resume_design" className="button button2">Continue</Link>
         </div>
     )

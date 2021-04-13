@@ -17,10 +17,12 @@ const ContentLayer = (props) => {
 
 const ContentLayerSelectionItem = () => {
     const { selectedContentLayer, setSelectedContentLayer } = useContext(ModelDesignContext)
-    
+    console.log("selectedContentLayer from ContentLayerSelection:" + selectedContentLayer)
+
     const toggleLayer = (event) => {
         if(event.target.innerText !== selectedContentLayer) {
             setSelectedContentLayer(event.target.innerText)
+            console.log("selectedContentLayer from ContentLayerSelection:" + selectedContentLayer)
         }
     }
 

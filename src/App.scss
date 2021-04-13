@@ -123,7 +123,7 @@ body {
   &.button1 {
     color: azure;
     background-color: #3a3b4d; 
-    border-color: darkturquoise;
+    border-color: $secondary_1;
   }
   
   &.button2 {
@@ -133,13 +133,11 @@ body {
   }
   
   &.button1:hover {
-    color: azure;
-    background-color: darkturquoise;
+    background-color: $secondary_1;
   }
   
   &.button2:hover {
-    color: azure;
-    background-color: darkturquoise;
+    background-color: $secondary_1;
   }
 }
 
@@ -157,6 +155,7 @@ body {
 
 .pad-sides {
   padding: 0vh 1vh;
+  display:inline
 }
 
 .pad-style-image {
