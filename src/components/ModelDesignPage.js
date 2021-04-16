@@ -59,7 +59,6 @@ export const ModelDesignPage = () => {
     const styleLayerSelection = <StyleLayerSelectionItem />
     const parameterSelection = <ParameterSelectionItem />
 
-    
     return (
         <ModelDesignContext.Provider value={{
             selectedStyleImage, setSelectedStyleImage,
@@ -68,12 +67,7 @@ export const ModelDesignPage = () => {
             styleLayerWeights, setStyleLayerWeight, 
             contentWeight, setContentWeight, 
             styleWeight, setStyleWeight,
-            numOfIterations, setNumOfIterations,
-            imageInput, 
-            styleSelection, 
-            contentLayerSelection,
-            styleLayerSelection,
-            parameterSelection,
+            numOfIterations, setNumOfIterations, 
             design, layers}}>
             <StepProgressItem />
         </ModelDesignContext.Provider>

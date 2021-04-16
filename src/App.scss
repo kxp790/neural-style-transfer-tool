@@ -18,6 +18,10 @@ $secondary_6: #005254;
 $secondary_7: #003e3f;
 $secondary_8: #00292a;
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-image: url("images/background.png");
   background-attachment: fixed;
@@ -36,7 +40,7 @@ body {
 .App-header {
   display: flex;
   justify-content: space-between;
-  height: 6vh;
+  height: 45px;
   background-color: $primary_3;
   color: azure;
 
@@ -181,7 +185,6 @@ body {
 
 .model-item-container {
   padding: 5vh;
-  width: 800px;
   margin: 0 auto;
 
   .box-container {
@@ -336,6 +339,117 @@ body {
   &.enabled {
     background-color: $primary_7;
     box-shadow: 1px 1px $primary_1;
+  }
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 40px;
+
+  margin-top: 40px;
+
+  padding: 0px 10%;
+
+  .step-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+      
+      max-width: 25px;
+  }
+
+  .progress-step {
+    grid-area: 1 / 1 / 2 / 2; 
+
+    color: white;
+    width: 25px; 
+    height: 14.43px;
+    font-size: 12px;
+    background-color: rgba(211, 211, 211, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 0px 0px 4px rgba(0,0,0,0.42);
+  }
+
+  .progress-label { 
+    white-space: nowrap;
+    position: relative;
+    top: 40px;
+    grid-area: 1 / 1 / 2 / 2;
+    line-height: 0;
+left:12.5px;
+    transform: translateX(-50%);
+  }
+
+  .progress-step.filled {
+    background-color: $secondary_2;
+  }
+
+  .progress-step:before {
+    bottom: 100%;
+    border-bottom: 7.22px solid rgba(211, 211, 211, 1);
+  }
+
+  .progress-step.filled:before {
+    border-bottom: 7.22px solid $secondary_2;
+  }
+  
+  .progress-step:after {
+    top: 100%;
+    width: 0;
+    border-top: 7.22px solid rgba(211, 211, 211, 1);
+  }
+
+  .progress-step.filled:after {
+    border-top: 7.22px solid $secondary_2;
+  }
+  
+  .progress-step:before,
+  .progress-step:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    border-left: 12.5px solid transparent;
+    border-right: 12.5px solid transparent;
+  }
+  
+  
+}
+
+.model-design {
+  width: 100%;
+  min-height: calc(100% - 45px);
+
+
+  display: flex;
+
+  button {
+    width:120px;
+    flex-grow: 0;
+    border: none;
+
+    font-size:3.2em;
+    color: rgba(255, 255, 255, 0.7);
+
+    background-color: transparent;
+
+    transition: all 0.12s ease-in;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+      font-size: 4em;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .content {
+    flex-grow: 1;
   }
 }
 

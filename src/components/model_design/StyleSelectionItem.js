@@ -1,16 +1,15 @@
 import React, { useContext } from 'react';
 import { ModelDesignContext } from './ModelDesignContext';
+import { AppContext } from '../AppContext';
 import axios from 'axios'
 import style_1 from '../../images/placeholder.png';
 import style_2 from '../../images/stained-glass.jpg';
 import style_3 from '../../images/placeholder.png';
-import { AppContext } from '../AppContext';
 
 const StyleSelectionItem = () => {
     const styles = ['placeholder_1.png', 'stained-glass.jpg', 'placeholder_2.png']
     const { design } = useContext(AppContext)
     const { selectedStyleImage, setSelectedStyleImage } = useContext(ModelDesignContext)
-    console.log("selectedStyle from StyleSelectionItem:" + selectedStyleImage)
 
     const updateSelectedStyleImage = (event) => {
         setSelectedStyleImage(event.target.name)
