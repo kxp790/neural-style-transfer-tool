@@ -1,6 +1,7 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import PinInput from 'react-pin-input'
+import { AppContext } from './AppContext'
 
 const DesignIdForm = ({ onDesignIdChange, onPinChange, validate }) => {
 
@@ -42,13 +43,16 @@ const DesignIdForm = ({ onDesignIdChange, onPinChange, validate }) => {
 }
 
 const ResumeDesignPage = ({ history }) => {
+    // context 
+    const { design, setDesign } = useContext(AppContext)
+    
     // input storing variables
     const [ inputDesignId, setInputDesignId ] = useState('')
     const [ inputPin, setInputPin ] = useState(1234)
 
     // function sends get request with input design id and pin to api to check pair validity and either receives none or the corresponding design
     // if none then displays validation error, if design is returned then sets context design and redirects to model 
-    async function validateInput (event) {
+    const validateInput = (event) => {
         event.preventDefault()
         history.push('/model')
         axios.post('http://localhost:5000/check_design_with_pin', {
@@ -58,9 +62,21 @@ const ResumeDesignPage = ({ history }) => {
             headers: {
                 'Access-Control-Allow-Origin': 'http://localhost:3000'
         }
-        })
-        .then(function (response) {
-            console.log(response.data)
+        }).then(function (response) {
+            if(response.status === 200) {
+                axios.get('http://localhost:5000/get_design/' + inputDesignId, {
+                headers: {
+                    'Access-Control-Allow-Origin': 'http://localhost:3000'
+                }
+                }).then(function (response) {
+                    delete response.data['_id']
+                    console.log(response.status)
+                    console.log(response)
+                    
+                    setDesign(response.data)
+                    console.log(design)
+                })
+            } else {console.log(response.status)}
         })
     }
 

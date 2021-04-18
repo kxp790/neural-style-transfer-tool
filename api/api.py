@@ -63,9 +63,16 @@ pin_data_default = {
 # design id length
 design_id_length = 6
 
+# get random string of numbers and lower case letters
 def get_random_design_id():
-    return ''.join(choices(ascii_lowercase + digits, k=design_id_length))
+    return ''.join(choices(digits + ascii_lowercase, k=design_id_length))
 
+# check if design id excists
+def check_design_id(design_id):
+    design = db.designs.find_one({"id": design_id})
+    return (design is not None)
+
+# get new random id that doesn not yet exist in the database
 def get_new_design_id():
     random_string = get_random_design_id()
     unique = False
@@ -77,7 +84,7 @@ def get_new_design_id():
             random_string = get_random_design_id()
     return random_string
 
-# save image
+# save uploaded image
 @app.route('/', methods=['POST'])
 def save_image():
     if request.method == 'POST':
@@ -96,20 +103,22 @@ def save_image():
             copyfile(INPUT_FOLDER + '/' + image_name, OUTPUT_FOLDER + '/' + image_name)
             return Response(status=200)
 
-# receive image and style it
+# get styled image
 @app.route('/style_transfer/<string:design_id>')
 @cross_origin()
 def style_transfer(design_id):
     model.style_transfer(image_name, 'stained-glass')
-    return '200'
+    return Response(status=200)
 
 # get input image
 @app.route('/input/<string:image_name>', methods=['GET'])
+@cross_origin()
 def get_input_image(image_name):
     return send_file(INPUT_FOLDER + '/' + image_name)
 
 # get output image
 @app.route('/output/<string:image_name>', methods=['GET'])
+@cross_origin()
 def get_output_image(image_name):
     return send_file(OUTPUT_FOLDER + '/' + image_name)
 
@@ -119,14 +128,16 @@ def get_output_image(image_name):
 def check_design_with_pin():
     design_id = request.json['design_id']
     pin = request.json['pin']
-    pin_from_db = db.pins.find_one({'id': design_id, 'pin': int(pin)})
-    return Response(status=200) if (json.loads(json_util.dumps(pin_from_db))) else Response(status=404)
+    pin_data = db.pins.find_one({'id': design_id, 'pin': int(pin)})
+    return Response(status=200) if json.loads(json_util.dumps(pin_data)) else Response(status=404)
 
-# check if design id excists
-@app.route('/check_design_id/<string:design_id>')
-def check_design_id(design_id):
-    design = db.designs.find_one({"id": design_id})
-    return (design is not None) 
+# get design by id
+@app.route('/get_design/<string:design_id>')
+@cross_origin()
+def get_design_by_id(design_id):
+    design_data = db.designs.find_one({"id": design_id})
+    design_json = json_util.dumps(design_data)
+    return Response(status=200, response=design_json) if json.loads(json_util.dumps(design_json)) else Response(status=404)
 
 # update existing design
 @app.route('/update_design', methods=['POST'])
