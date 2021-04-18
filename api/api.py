@@ -1,3 +1,5 @@
+
+
 import json
 import os
 import time
@@ -92,7 +94,7 @@ def save_image():
         if file:
             file.save(os.path.join(app.config['INPUT_FOLDER'], image_name))
             copyfile(INPUT_FOLDER + '/' + image_name, OUTPUT_FOLDER + '/' + image_name)
-            return True
+            return Response(status=200)
 
 # receive image and style it
 @app.route('/style_transfer/<string:design_id>')
@@ -111,24 +113,13 @@ def get_input_image(image_name):
 def get_output_image(image_name):
     return send_file(OUTPUT_FOLDER + '/' + image_name)
 
-# find model design instance by id
-@app.route('/design/<string:design_id>')
-def home(design_id):
-    design = db.designs.find_one({"id": design_id})
-    return json.loads(json_util.dumps(design))
-
 # check if design and pin combo exists
 @app.route('/check_design_with_pin', methods=['POST'])
 @cross_origin()
 def check_design_with_pin():
-    print('AAAAA++++++++++++++++++++++++++++++')
     design_id = request.json['design_id']
     pin = request.json['pin']
-    print(design_id)
-    print(pin)
     pin_from_db = db.pins.find_one({'id': design_id, 'pin': int(pin)})
-    
-    print(pin_from_db)
     return Response(status=200) if (json.loads(json_util.dumps(pin_from_db))) else Response(status=404)
 
 # check if design id excists
@@ -145,12 +136,7 @@ def update_design():
     # loop through design_data_default dict keys and make a new list from them with values sent in the request 
     # update with list items 
     style_image_name = request.json['style_image_name']
-
     db.designs.find_and_modify(query={'id': design_id}, update={"$set": {'style_image_name': style_image_name}})
-    # db.students2.findAndModify({
-    #     query: {  "_id" : 1 },
-    #     update: [ { $set: { "total" : { $sum: "$grades.grade" } } } ]
-    # } )
     return Response(status=200)
     
 # insert new design  

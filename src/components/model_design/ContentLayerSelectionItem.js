@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
-import { ModelDesignContext } from './ModelDesignContext';
+import React, { useContext } from 'react'
+import { ModelDesignContext } from './ModelDesignContext'
 
 const ContentLayer = (props) => {
     return (
-        <table className={props.isEnabled ? "content-layer enabled" : "content-layer"}>
+        <table className={props.isEnabled ? "parameter-table enabled" : "parameter-table"}>
             <tbody>
                 <tr>
                     <td>
-                        <text className="layer-box" onClick={props.onPick}>{props.layer}</text>
+                        <p className="name-box content-layer" onClick={props.onPick} style={{cursor: "pointer"}}>{props.layer}</p>
                     </td>
                 </tr>
             </tbody>  
@@ -16,13 +16,13 @@ const ContentLayer = (props) => {
 }
 
 const ContentLayerSelectionItem = () => {
+    // context
     const { selectedContentLayer, setSelectedContentLayer } = useContext(ModelDesignContext)
-    console.log("selectedContentLayer from ContentLayerSelection:" + selectedContentLayer)
 
+    // update selected content layer
     const toggleLayer = (event) => {
         if(event.target.innerText !== selectedContentLayer) {
             setSelectedContentLayer(event.target.innerText)
-            console.log("selectedContentLayer from ContentLayerSelection:" + selectedContentLayer)
         }
     }
 
@@ -34,7 +34,8 @@ const ContentLayerSelectionItem = () => {
                         {layers.map(layer => <ContentLayer 
                             onPick={(event) => toggleLayer(event)}
                             isEnabled={(selectedContentLayer === layer)} 
-                            layer={layer} />)}
+                            layer={layer} 
+                        />)}
                     </div>
                 )}
             </ModelDesignContext.Consumer>

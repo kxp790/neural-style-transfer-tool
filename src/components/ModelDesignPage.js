@@ -1,15 +1,18 @@
-import React, { useState, useContext } from 'react'
-import { ModelDesignContext } from './model_design/ModelDesignContext'
+import React, { useContext, useState } from 'react'
 import { AppContext } from './AppContext'
+import { ModelDesignContext } from './model_design/ModelDesignContext'
 import StepProgressItem from './model_design/StepProgressItem'
-import ContentLayerSelectionItem from './model_design/ContentLayerSelectionItem';
-import ImageInputItem from './model_design/ImageInputItem';
-import ParameterSelectionItem from './model_design/ParameterSelectionItem';
-import StyleLayerSelectionItem from './model_design/StyleLayerSelectionItem';
-import StyleSelectionItem from './model_design/StyleSelectionItem';
 
-export const ModelDesignPage = () => {
-    const { design, layers } = useContext(AppContext)
+const ModelDesignPage = () => {
+    // context
+    const { design } = useContext(AppContext)
+
+    // list of editable convolutional layers in the network
+    const layers = ['block1_conv1', 'block1_conv2', 
+                  'block2_conv1', 'block2_conv2', 
+                  'block3_conv1', 'block3_conv2', 'block3_conv3', 
+                  'block4_conv1', 'block4_conv2', 'block4_conv3', 
+                  'block5_conv1', 'block5_conv2', 'block5_conv3']
 
     // selected style image 
     const [ selectedStyleImage, setSelectedStyleImage ] = useState(design.style_image_name)
@@ -17,47 +20,34 @@ export const ModelDesignPage = () => {
     // selected content layer 
     const [ selectedContentLayer, setSelectedContentLayer ] = useState(design.content_layer)
 
-    // style layer selection item variables
+    // selected style layers and weights
     var initialWeights = {}
     layers.forEach (layer => {
         initialWeights[layer] = '0.1'
     })
     Object.entries(design.style_layers).forEach(weight => {
-        initialWeights[weight[0]] = weight[1]
-    });
+        initialWeights[weight[0]] = weight[1].toString()
+    })
     const [ styleLayerWeights, setStyleLayerWeights ] = useState(initialWeights)
     const [ selectedStyleLayers, setSelectedStyleLayers ] = useState(Object.keys(design.style_layers))
     const setStyleLayerWeight = (layer, weight) => {
-        setStyleLayerWeights({
-            ...styleLayerWeights,
-            [layer]: weight
-        })
+        if(weight.toString() === '0.' || weight > 0) {
+            setStyleLayerWeights({
+                ...styleLayerWeights,
+                [layer]: weight
+            })
+        } else {
+            setStyleLayerWeights({
+                ...styleLayerWeights,
+                [layer]: 0
+            })
+        }
     }
-
-    // other parameters variables
+    
+    // other parameters
     const [ contentWeight, setContentWeight ] = useState(design.content_weight)
     const [ styleWeight, setStyleWeight ] = useState(design.style_weight)
     const [ numOfIterations, setNumOfIterations ] = useState(design.iterations)
-    
-    // function to export updated design data
-    const jsonifyDesignData = () => {
-        return {
-            'id': design.id,
-            'style_image_name': selectedStyleImage,
-            'content_layer': selectedContentLayer,
-            'style_layers': {},
-            'content_weight': contentWeight,
-            'style_weight' : styleWeight,
-            'iterations' : numOfIterations
-        }
-    }
-
-    // setup the step content 
-    const imageInput = <ImageInputItem />
-    const styleSelection = <StyleSelectionItem />
-    const contentLayerSelection = <ContentLayerSelectionItem />
-    const styleLayerSelection = <StyleLayerSelectionItem />
-    const parameterSelection = <ParameterSelectionItem />
 
     return (
         <ModelDesignContext.Provider value={{
@@ -73,3 +63,5 @@ export const ModelDesignPage = () => {
         </ModelDesignContext.Provider>
     )
 }
+
+export default ModelDesignPage

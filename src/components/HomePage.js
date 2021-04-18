@@ -1,21 +1,20 @@
-import React, { useContext } from 'react';
-import { withRouter, Link } from 'react-router-dom'; 
-import axios from 'axios';
-import { AppContext } from './AppContext';
+import axios from 'axios'
+import React, { useContext } from 'react'
+import { Link, withRouter } from 'react-router-dom'
+import { AppContext } from './AppContext'
 
-export const HomePage = ({ history }) => {
-
+const HomePage = ({ history }) => {
+    // context
     const { setDesign } = useContext(AppContext)
 
+    // function to call api to make a new design, load it into context and and redirects to model
     async function makeNewDesign () {
         history.push('/new_design')
-
         axios.get('http://localhost:5000/create_design', {
             headers: {
                 'Access-Control-Allow-Origin': 'http://localhost:3000'
             }
-        })
-        .then(function (response) {
+        }).then(function (response) {
             delete response.data['_id']
             console.log(response.data)
             setDesign(response.data)

@@ -1,16 +1,22 @@
-import React from 'react';
-import { ModelDesignContext } from './ModelDesignContext';
+import React from 'react'
+import { ModelDesignContext } from './ModelDesignContext'
 
 const Parameter = (props) => {
     return (
-        <table className="style-layer-weight">
+        <table className="parameter-table">
             <tbody>
                 <tr>
                     <td className="cell-width">
-                        <text className="layer-box" style={{cursor: "pointer"}}>{props.name}</text>
+                        <p className="name-box">{props.name}</p>
                     </td>
                     <td>
-                        <input className="weight-box" type="text" value={props.value} onChange={props.onChange}></input>
+                        <input className={(/^[1-9][0-9]?$|^100$/).test(props.value) ? "weight-box" : "weight-box invalid"} value={props.value} onChange={props.onChange} type="text" maxLength={props.maxLength} pattern={props.pattern} required></input>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        {!(/^[1-9][0-9]?$|^100$/).test(props.value) ? <p>Allowed range: 1-100</p> : <p></p>}
                     </td>
                 </tr>
             </tbody>
@@ -19,6 +25,7 @@ const Parameter = (props) => {
 }
 
 const ParameterSelectionItem = () => {
+    
     return (
         <div className="model-item-container">
             <ModelDesignContext.Consumer>
