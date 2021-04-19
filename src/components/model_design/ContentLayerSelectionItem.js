@@ -34,7 +34,8 @@ const ContentLayerSelectionItem = () => {
                         {layers.map(layer => <ContentLayer 
                             onPick={(event) => toggleLayer(event)}
                             isEnabled={(selectedContentLayer === layer)} 
-                            layer={layer} 
+                            layer={layer}
+                            key={layer}
                         />)}
                     </div>
                 )}

@@ -28,7 +28,7 @@ const ProgressStep = (props) => {
 
 const StepProgressItem = (props) => {
     // context
-    const { design, setDesign } = useContext(AppContext)
+    const { design, setDesign, setHasResult } = useContext(AppContext)
     const { layers, selectedStyleImage, selectedContentLayer, selectedStyleLayers, styleLayerWeights, 
         contentWeight, styleWeight, numOfIterations } = useContext(ModelDesignContext)
 
@@ -107,14 +107,12 @@ const StepProgressItem = (props) => {
     // function to submit data inserted during step progress and and redirect to results 
     const submitForm = async () => {
         props.history.push('/result')
-        console.log(selectedStyleLayers)
+
         var styleLayers = {}
         selectedStyleLayers.forEach(function (layer) {
-            console.log(layer)
             styleLayers[layer] = styleLayerWeights[layer]
         })
-        console.log("RESULT STYLELAYERS WPOOOOOOOOOOOOO")
-        console.log(styleLayers)
+
         axios.post('http://localhost:5000/update_design', {
             design_id: design.id,
             style_image_name : selectedStyleImage,
@@ -127,20 +125,19 @@ const StepProgressItem = (props) => {
             headers: {
                 'Access-Control-Allow-Origin': 'http://localhost:3000'
             }
-        }).then(function (response) {
-            if(response.status === 200) {
-                console.log(response.data)
-                delete response.data['_id']
-                console.log(design)
-                setDesign(response.data)
-                console.log(design)
-                axios.get('http://localhost:5000/style_transfer/' + design.id, {
-                    headers: {
-                        'Access-Control-Allow-Origin': 'http://localhost:3000'
-                    }
-                }).then(x => console.log("Design updated"))
-            } else {console.log(response.status)}
-        })
+        }).then((response) => {
+            delete response.data['_id']
+            setDesign(response.data)
+
+            axios.get('http://localhost:5000/style_transfer/' + design.id, {
+                headers: {
+                    'Access-Control-Allow-Origin': 'http://localhost:3000'
+                }
+            }).then((response) => {
+                setHasResult(true)
+                console.log("I've sent hasResponse, allegedly")
+            }).catch((error) => console.log(error))
+        }).catch((error) => console.log(error))
     }
     
     // progress bar component

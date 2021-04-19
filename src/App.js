@@ -17,10 +17,11 @@ import SupportPage from './components/SupportPage'
 const App = () => {
   // context
   const [ design, setDesign ] = useState()
+  const [ hasResult, setHasResult ] = useState(false)
   
   return (
     <BrowserRouter>
-      <AppContext.Provider value={{design, setDesign}}>
+      <AppContext.Provider value={{design, setDesign, hasResult, setHasResult}}>
         <div className="App">
           <Header />
           {1 === 2 ? (<Redirect to="/" />) : (

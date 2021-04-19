@@ -107,7 +107,7 @@ def save_image():
 @app.route('/style_transfer/<string:design_id>')
 @cross_origin()
 def style_transfer(design_id):
-    # model.style_transfer(image_name, 'stained-glass')
+    model.style_transfer(image_name, 'stained-glass')
     return Response(status=200)
 
 # get input image
