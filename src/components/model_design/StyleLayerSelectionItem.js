@@ -19,7 +19,7 @@ const StyleLayerWeight = (props) => {
 }
 
 const StyleLayerSelectionItem = () => {
-    const { selectedStyleLayers, setSelectedStyleLayers, styleLayerWeights } = useContext(ModelDesignContext)
+    const { selectedStyleLayers, setSelectedStyleLayers } = useContext(ModelDesignContext)
 
     const toggleLayer = (layer) => {
         if(selectedStyleLayers.indexOf(layer) === -1) {

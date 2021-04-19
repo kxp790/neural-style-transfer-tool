@@ -107,7 +107,7 @@ def save_image():
 @app.route('/style_transfer/<string:design_id>')
 @cross_origin()
 def style_transfer(design_id):
-    model.style_transfer(image_name, 'stained-glass')
+    # model.style_transfer(image_name, 'stained-glass')
     return Response(status=200)
 
 # get input image
@@ -144,11 +144,23 @@ def get_design_by_id(design_id):
 @cross_origin()
 def update_design():
     design_id = request.json['design_id']
-    # loop through design_data_default dict keys and make a new list from them with values sent in the request 
-    # update with list items 
     style_image_name = request.json['style_image_name']
-    db.designs.find_and_modify(query={'id': design_id}, update={"$set": {'style_image_name': style_image_name}})
-    return Response(status=200)
+    content_layer = request.json['content_layer']
+    style_layers = request.json['style_layers']
+    content_weight = request.json['content_weight']
+    style_weight = request.json['style_weight']
+    iterations = request.json['iterations']
+    db.designs.find_and_modify(query={'id': design_id}, update={"$set": {
+        'style_image_name': style_image_name, 
+        'content_layer': content_layer,
+        'style_layers': style_layers,
+        'content_weight': content_weight,
+        'style_weight': style_weight,
+        'iterations': iterations
+    }})
+    design_data = db.designs.find_one({"id": design_id})
+    design_json = json_util.dumps(design_data)
+    return Response(status=200, response=design_json) if json.loads(json_util.dumps(design_json)) else Response(status=404)
     
 # insert new design  
 @app.route('/create_design')

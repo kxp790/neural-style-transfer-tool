@@ -28,7 +28,7 @@ const ProgressStep = (props) => {
 
 const StepProgressItem = (props) => {
     // context
-    const { design } = useContext(AppContext)
+    const { design, setDesign } = useContext(AppContext)
     const { layers, selectedStyleImage, selectedContentLayer, selectedStyleLayers, styleLayerWeights, 
         contentWeight, styleWeight, numOfIterations } = useContext(ModelDesignContext)
 
@@ -104,28 +104,43 @@ const StepProgressItem = (props) => {
         parameterSelectionValidator
     ]
 
-    // function to export updated design data
-    const jsonifyDesignData = () => {
-        return {
-            'id': design.id,
-            'style_image_name': selectedStyleImage,
-            'content_layer': selectedContentLayer,
-            'style_layers': {},
-            'content_weight': contentWeight,
-            'style_weight' : styleWeight,
-            'iterations' : numOfIterations
-        }
-    }
-
-    // function to submit form and progress to results
+    // function to submit data inserted during step progress and and redirect to results 
     const submitForm = async () => {
         props.history.push('/result')
-        console.log(jsonifyDesignData)
-        axios.get('http://localhost:5000/style_transfer/' + design.id, {
+        console.log(selectedStyleLayers)
+        var styleLayers = {}
+        selectedStyleLayers.forEach(function (layer) {
+            console.log(layer)
+            styleLayers[layer] = styleLayerWeights[layer]
+        })
+        console.log("RESULT STYLELAYERS WPOOOOOOOOOOOOO")
+        console.log(styleLayers)
+        axios.post('http://localhost:5000/update_design', {
+            design_id: design.id,
+            style_image_name : selectedStyleImage,
+            content_layer: selectedContentLayer,
+            style_layers: styleLayers,
+            content_weight: contentWeight,
+            style_weight: styleWeight,
+            iterations: numOfIterations
+        }, {
             headers: {
                 'Access-Control-Allow-Origin': 'http://localhost:3000'
             }
-        }).then(x => console.log("Design updated"))
+        }).then(function (response) {
+            if(response.status === 200) {
+                console.log(response.data)
+                delete response.data['_id']
+                console.log(design)
+                setDesign(response.data)
+                console.log(design)
+                axios.get('http://localhost:5000/style_transfer/' + design.id, {
+                    headers: {
+                        'Access-Control-Allow-Origin': 'http://localhost:3000'
+                    }
+                }).then(x => console.log("Design updated"))
+            } else {console.log(response.status)}
+        })
     }
     
     // progress bar component
