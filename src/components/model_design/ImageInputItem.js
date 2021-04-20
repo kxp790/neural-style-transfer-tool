@@ -1,16 +1,62 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState, useContext, useCallback, useEffect } from 'react'
+import { useDropzone } from 'react-dropzone'
+import { AppContext } from '../AppContext'
+import { ModelDesignContext } from './ModelDesignContext'
 
-const ImageForm = () => (
-  <form method="POST" action="http://localhost:5000" encType="multipart/form-data">
-    <input type="file" name="file" accept=".jpg, .png" />
-    <input type="submit" value="Upload" />
-  </form>
-)
+function Basic(props) {
+  const onDrop = useCallback(files => {
+    props.onChange(files[0])
+  })
 
-const ImageInputItem = () => (
-  <div className="pad-block">
-      <ImageForm />
-  </div>
-)
+  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({onDrop: onDrop, accept: "image/jpg, image/jpeg, image/png"})
+
+  return (
+    <section className="drop-container">
+      <div style={{padding: "5vh", width: "70%", margin: "0 auto", minWidth: "fit-content", borderStyle: "dashed", borderWidth: "1px", borderRadius: "2px"}} {...getRootProps({className: 'dropzone'})}>
+        <input {...getInputProps()} />
+        <p>Drag 'n' drop some files here, or click to select files</p>
+      </div>
+    </section>
+  )
+}
+
+const ImageInputItem = () => {
+  const { design } = useContext(AppContext)
+  const [ image, setImage ] = useState()
+  const { hasSelectedContentImage, setHasSelectedContentImage } = useContext(ModelDesignContext)
+
+  const [ imgHash, setImgHash ] = useState(Date.now())
+
+  useEffect(() => {}, [image, hasSelectedContentImage])
+
+  const updateImage = (file) => {
+    var ext = file.name.split('.')[1]
+    var renamedFile = new File([file], `${design.id}.${ext}`, { type: file.type })
+    setImage(renamedFile)
+    var data = new FormData()
+    data.append('file', renamedFile)
+
+    setHasSelectedContentImage(false)
+    axios.post('http://localhost:5000/upload_image', data, {
+      headers: {
+          'Access-Control-Allow-Origin': 'http://localhost:3000',
+          'Content-Type': 'multipart/form-data'
+      }
+    }).then((response) => {
+      setHasSelectedContentImage(true)
+      setImgHash(Date.now())
+    }).catch((error) => console.log(error))
+  }
+
+  return(
+    <div style={{paddingTop: "20vh"}}>
+        <Basic onChange={(file) => updateImage(file)}/>
+        <div style={{maxWidth: "125px", paddingTop: "5vh", margin: "0 auto"}}>
+          {!hasSelectedContentImage ? null : <img src={'http://localhost:5000/input/' + design.id + '.jpg?' + imgHash} style={{maxWidth: "125px", borderStyle: "dotted", borderWidth: "1px", borderRadius: "2px"}} />}
+        </div>
+    </div>
+  )
+}
 
 export default ImageInputItem

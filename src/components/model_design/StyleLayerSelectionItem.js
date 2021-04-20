@@ -35,12 +35,13 @@ const StyleLayerSelectionItem = () => {
                 {({styleLayerWeights, setStyleLayerWeight}) => (
                     <div>
                         {Object.entries(styleLayerWeights).map(layer => <StyleLayerWeight 
-                            className="pad-top-bottom"
+                            style={{padding: "0.5vh 0vh"}}
                             value={layer[1]} 
                             onChange={(e) => setStyleLayerWeight(layer[0], e.target.value)} 
                             onPick={() => toggleLayer(layer[0])} 
                             isEnabled={selectedStyleLayers.some(l => l === layer[0])} 
                             layer={layer[0]} 
+                            key={layer[0]}
                         />)}
                     </div>
                 )}

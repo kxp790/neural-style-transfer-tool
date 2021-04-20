@@ -29,7 +29,7 @@ const ProgressStep = (props) => {
 const StepProgressItem = (props) => {
     // context
     const { design, setDesign, setHasResult } = useContext(AppContext)
-    const { layers, selectedStyleImage, selectedContentLayer, selectedStyleLayers, styleLayerWeights, 
+    const { layers, hasSelectedContentImage, selectedStyleImage, selectedContentLayer, selectedStyleLayers, styleLayerWeights, 
         contentWeight, styleWeight, numOfIterations } = useContext(ModelDesignContext)
 
     // list of steps in step progress
@@ -61,8 +61,7 @@ const StepProgressItem = (props) => {
     // image input step validator
     // true if image exists in database
     const imageInputValidator = () => {
-        // TODO - check api whether image with design_id is in folder
-        return true
+        return hasSelectedContentImage
     }
 
     // style image selection step validator
@@ -106,8 +105,9 @@ const StepProgressItem = (props) => {
 
     // function to submit data inserted during step progress and and redirect to results 
     const submitForm = async () => {
+        setHasResult(false)
         props.history.push('/result')
-
+        
         var styleLayers = {}
         selectedStyleLayers.forEach(function (layer) {
             styleLayers[layer] = styleLayerWeights[layer]
@@ -135,7 +135,6 @@ const StepProgressItem = (props) => {
                 }
             }).then((response) => {
                 setHasResult(true)
-                console.log("I've sent hasResponse, allegedly")
             }).catch((error) => console.log(error))
         }).catch((error) => console.log(error))
     }

@@ -14,6 +14,9 @@ const ModelDesignPage = () => {
                   'block4_conv1', 'block4_conv2', 'block4_conv3', 
                   'block5_conv1', 'block5_conv2', 'block5_conv3']
 
+    // whether the user has uploaded a content image
+    const [ hasSelectedContentImage, setHasSelectedContentImage ] = useState(false)
+
     // selected style image 
     const [ selectedStyleImage, setSelectedStyleImage ] = useState(design.style_image_name)
 
@@ -51,6 +54,7 @@ const ModelDesignPage = () => {
 
     return (
         <ModelDesignContext.Provider value={{
+            hasSelectedContentImage, setHasSelectedContentImage,
             selectedStyleImage, setSelectedStyleImage,
             selectedContentLayer, setSelectedContentLayer, 
             selectedStyleLayers, setSelectedStyleLayers, 

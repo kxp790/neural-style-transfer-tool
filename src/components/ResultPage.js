@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useRef, useEffect } from 'react'
 import PropagateLoader from 'react-spinners/PropagateLoader'
 import { AppContext } from './AppContext'
 
@@ -14,8 +14,16 @@ const ResultPage = () => {
   // whether style transfer has finished
   const { design, hasResult } = useContext(AppContext)
 
+  useEffect(() => {
+    
+  }, [hasResult])
+
+  const shouldLoad = () => {
+    return !hasResult || design == null
+  }
+
   return (
-    !hasResult ? <PropagateLoader /> : <div className="cards">
+    shouldLoad() ? <PropagateLoader /> : <div className="cards">
       <ImageWrapper src={'http://localhost:5000/input/' + design.id + '.jpg'} title="BEFORE" />
       <ImageWrapper src={'http://localhost:5000/output/' + design.id + '.jpg'} title="AFTER" />
     </div>

@@ -85,7 +85,8 @@ def get_new_design_id():
     return random_string
 
 # save uploaded image
-@app.route('/', methods=['POST'])
+@app.route('/upload_image', methods=['POST'])
+@cross_origin()
 def save_image():
     if request.method == 'POST':
         # check if has the file
@@ -99,15 +100,15 @@ def save_image():
             return redirect(request.url)
         # if file has an allowed extension
         if file:
-            file.save(os.path.join(app.config['INPUT_FOLDER'], image_name))
-            copyfile(INPUT_FOLDER + '/' + image_name, OUTPUT_FOLDER + '/' + image_name)
+            file.save(os.path.join(app.config['INPUT_FOLDER'], file.filename))
+            copyfile(INPUT_FOLDER + '/' + file.filename, OUTPUT_FOLDER + '/' + file.filename)
             return Response(status=200)
 
 # get styled image
 @app.route('/style_transfer/<string:design_id>')
 @cross_origin()
 def style_transfer(design_id):
-    model.style_transfer(image_name, 'stained-glass')
+    model.style_transfer(design_id, 'stained-glass')
     return Response(status=200)
 
 # get input image

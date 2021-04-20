@@ -1,9 +1,10 @@
 import axios from 'axios'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
+import { useHistory } from 'react-router-dom'
 import PinInput from 'react-pin-input'
 import { AppContext } from './AppContext'
 
-const DesignIdForm = ({ onDesignIdChange, onPinChange, validate }) => {
+const DesignIdForm = ({ handleEditModel, handleSeeResult, onDesignIdChange, onPinChange }) => {
 
     // handle design id change
     const handleDesignIdChange = (event) => {
@@ -16,14 +17,14 @@ const DesignIdForm = ({ onDesignIdChange, onPinChange, validate }) => {
     }
 
     return(
-        <form>
+        <>
             <h4 className="caption-box">INSERT DESIGN ID:</h4>
-            <div className="pad-bottom">
+            <div style={{paddingBottom: "2vh"}}>
                 <input className="input-text-box" type="text" required maxLength="6" pattern="[a-z0-9]{6}" onChange={handleDesignIdChange} />
             </div>
             <h4 className="caption-box">INSERT PIN:</h4>
             <PinInput 
-                className="pad-text"
+                className="pad-pin"
                 length={4} 
                 onChange={(value) => {handlePinChange(value)}}
                 type="numeric" 
@@ -35,54 +36,74 @@ const DesignIdForm = ({ onDesignIdChange, onPinChange, validate }) => {
                 autoSelect={true}
                 regexCriteria={/^[0-9]*$/}
             />
-            <input type="submit" to="/model" className="button button2" value="Edit model" onClick={validate} />
-            <p className="pad-sides">/</p>
-            <input type="submit" className="button button1" value="See results" onClick={(event) => validate(event)} />
-        </form>
+            <input type="submit" className="button button2" value="Edit model" onClick={handleEditModel} />
+            <p style={{padding: "0vh 1vh", display: "inline"}}>/</p>
+            <input type="submit" className="button button1" value="See result" onClick={handleSeeResult} />
+        </>
     )
 }
 
-const ResumeDesignPage = ({ history }) => {
+const ResumeDesignPage = () => {
     // context 
-    const { design, setDesign } = useContext(AppContext)
+    const { design, setDesign, setHasResult } = useContext(AppContext)
     
     // input storing variables
     const [ inputDesignId, setInputDesignId ] = useState('')
     const [ inputPin, setInputPin ] = useState(1234)
+    
+    const history = useHistory()
+
+    const handleEditModel = async () => {
+        if(await validateInput()) {
+            history.push('/model')
+        } else { 
+            console.log("Validation unsuccessful")
+        }
+    }
+
+    const handleSeeResult = async () => {
+        if(await validateInput()) {
+            setHasResult(true)
+            history.push('/result')
+        } else { 
+            console.log("Validation unsuccessful")
+        }
+    }
 
     // function sends get request with input design id and pin to api to check pair validity and either receives none or the corresponding design
     // if none then displays validation error, if design is returned then sets context design and redirects to model 
-    const validateInput = (event) => {
-        event.preventDefault()
-        history.push('/model')
-        axios.post('http://localhost:5000/check_design_with_pin', {
+    const validateInput = async () => {
+        var response = await axios.post('http://localhost:5000/check_design_with_pin', {
             design_id: inputDesignId,
             pin: inputPin
         }, {
             headers: {
                 'Access-Control-Allow-Origin': 'http://localhost:3000'
+            }
+        }).catch((error) => console.log(error))
+
+        if(response.status === 200) {
+            var designResponse = await axios.get('http://localhost:5000/get_design/' + inputDesignId, {
+            headers: {
+                'Access-Control-Allow-Origin': 'http://localhost:3000'
+            }
+            }).catch((error) => console.log(error))
+
+            if(designResponse.status === 200) {
+                delete designResponse.data['_id']
+                await setDesign(designResponse.data)
+                return true
+            }
+        } else {
+            console.log(response.status)
         }
-        }).then(function (response) {
-            if(response.status === 200) {
-                axios.get('http://localhost:5000/get_design/' + inputDesignId, {
-                headers: {
-                    'Access-Control-Allow-Origin': 'http://localhost:3000'
-                }
-                }).then(function (response) {
-                    delete response.data['_id']
-                    console.log(response.status)
-                    console.log(response)
-                    
-                    setDesign(response.data)
-                    console.log(design)
-                })
-            } else {console.log(response.status)}
-        })
+
+        return false
     }
 
     return (
-        <div className="pad-block">
-            <DesignIdForm onDesignIdChange={(v) => setInputDesignId(v)} onPinChange={(v) => setInputPin(v)} validate={validateInput}/>
+        <div style={{paddingTop: "20vh"}}>
+            <DesignIdForm onDesignIdChange={(v) => setInputDesignId(v)} onPinChange={(v) => setInputPin(v)} handleSeeResult={handleSeeResult} handleEditModel={handleEditModel} validate={validateInput}/>
         </div>
     )
 }
