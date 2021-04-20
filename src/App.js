@@ -24,16 +24,14 @@ const App = () => {
       <AppContext.Provider value={{design, setDesign, hasResult, setHasResult}}>
         <div className="App">
           <Header />
-          {1 === 2 ? (<Redirect to="/" />) : (
-            <Switch>
-              <Route path="/" exact component={HomePage} />
-              <Route path="/new_design" exact component={NewDesignPage} />
-              <Route path="/resume_design" exact component={ResumeDesignPage}/>
-              <Route path="/model" exact component={ModelDesignPage} />
-              <Route path="/result" exact component={ResultPage} />
-              <Route path="/support" component={SupportPage}/>
-            </Switch>
-          )}
+          <Switch>
+            <Route path="/new_design" exact component={NewDesignPage} />
+            <Route path="/resume_design" exact component={ResumeDesignPage}/>
+            <Route path="/model" exact children={design == null ? <Redirect to="/" /> : <ModelDesignPage />} />
+            <Route path="/result" exact children={design == null ? <Redirect to="/" /> : <ResultPage />} />
+            <Route path="/support" component={SupportPage}/>
+            <Route path="/" component={HomePage} />
+          </Switch>
         </div>
       </AppContext.Provider>
     </BrowserRouter>
