@@ -13,3 +13,5 @@ What is not allowed?
 
 URLs of used images:
 -   https://pixabay.com/photos/stained-glass-window-glass-63204/
+-   https://pixabay.com/photos/art-painting-work-of-art-artistic-1905711/
+-   

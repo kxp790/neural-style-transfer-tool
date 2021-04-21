@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import { ModelDesignContext } from './ModelDesignContext'
-import style_1 from '../../images/placeholder.png'
+import style_1 from '../../images/painting.png'
 import style_2 from '../../images/stained-glass.jpg'
 import style_3 from '../../images/placeholder.png'
 
 const StyleSelectionItem = () => {
     // list of style options
-    const styles = ['placeholder_1.png', 'stained-glass.jpg', 'placeholder_2.png']
+    const styles = ['painting.png', 'stained-glass.jpg', 'placeholder.png']
 
     // context
     const { selectedStyleImage, setSelectedStyleImage } = useContext(ModelDesignContext)
@@ -17,7 +17,8 @@ const StyleSelectionItem = () => {
     }
 
     return(
-        <div className="model-item-container">
+        <div className="model-item-container small">
+            <p style={{padding: "1vh"}}>Choose a style image:</p>
             <table className="style-image-table">
                 <tbody>
                     <tr>

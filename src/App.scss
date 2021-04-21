@@ -95,8 +95,8 @@ body {
   }
 
   img {
-    max-width: 40vw;
-    max-height: 30vh;
+    max-height: 50vh;
+    max-width: 50vw;
     margin: 2vw;
   }
 }
@@ -118,7 +118,7 @@ body {
   border-radius: 8px;
   padding: 12px 16px;
   min-width: fit-content;
-  width: 10vh;
+  width: 7vw;
   min-width: fit-content;
   font-size: 16px !important;
   border: 2px solid;
@@ -145,35 +145,28 @@ body {
   }
 }
 
-.pad-style-image {
-  height: 50vh;
-  justify-content: center;
-  vertical-align: middle; 
-  padding-left: 5vh;
-  padding-right: 5vh;
-}
-
 .pad-pin {
   padding: 2vh;
 }
 
 .model-item-container {
-  padding: 5vh;
   margin: 0 auto;
-}
+  width: 80vw;
 
-.wrap {
-  flex-direction: column !important;
-  justify-content: center !important;
-  vertical-align: middle;
-  align-items: center !important;
+  &.large{
+    padding: 5vh 1vh;
+  }
+
+  &.small{
+    padding: 20vh 1vh;
+  }
 }
 
 .input-text-box {
   font-size: 26px;
-  width: 16vh;
+  width: 15vw;
   height: fit-content;
-  padding: 1px 1px;
+  padding: 0.5vh 0.5vh;
   text-align: center;
   background-color: $primary_10;
   border-radius: 5px;
@@ -188,15 +181,15 @@ body {
 }
 
 .style-image-table {
-  width: 50vh;
   margin: 0 auto;
 
   .style-image-cell {
-    padding: 2vh;
+    padding: 1vh;
+    max-width: 26vh;
 
     .style-image {
-      width: 20vh !important;  
-      height: 20vh !important;
+      max-height: 22vh;
+      max-width: 22vw;
     }
 
     &.enabled {
@@ -210,14 +203,8 @@ body {
   margin: 0 auto;
   background-color: transparent;
   color: azure;
-  width: 20vh;
   min-width: fit-content;
   border-radius: 2px;
-  
-  .cell-width {
-    width: 20vh;
-    min-width: fit-content;
-  }
 
   .name-box {
     border: 0px solid transparent;
@@ -225,20 +212,21 @@ body {
     text-shadow: 1px 1px $primary_1;
     color: azure;
     min-width: fit-content;
+    width: 10vw;
     font-size: 16px !important;
 
-    .content-layer {
-      padding: 2px;
+    &.content-layer {
+      padding: 0.7vh;
     }
   }
 
   .weight-box {
     font-size: 16px;
-    width: 3vh !important;
-    min-width: fit-content;
+    width: 5vw !important;
+    min-width: 50px;
     padding: 0.5vh;
     text-align: center;
-    background-color: rgba(157,176,194, 0.5);
+    background-color: rgba(157,176,194, 0.8);
     border-radius: 5px;
     border: 2px solid;
     font-size: 16px !important;

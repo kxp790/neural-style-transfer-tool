@@ -33,11 +33,11 @@ const NewDesignPage = (props) => {
         <div style={{paddingTop: "20vh"}}>
             <AppContext.Consumer>
                 {({design}) => (
-                    design === undefined ? <PropogateLoader /> :
+                    design === undefined ? <PropogateLoader style={{paddingTop: "10vh"}} /> :
                     <>
-                        <h4>YOUR DESIGN ID:</h4>
+                        <h4 className="caption-box">YOUR DESIGN ID:</h4>
                         <h1 className="input-text-box">{design.id}</h1>
-                        <h4>CHOOSE A PIN:</h4>
+                        <h4 className="caption-box">CHOOSE A PIN:</h4>
                         <PinInput 
                             className="pad-pin"
                             length={4} 
@@ -46,7 +46,7 @@ const NewDesignPage = (props) => {
                             type="numeric" 
                             inputMode="number"
                             style={{paddingBottom: "3vh", width: "25vh", minWidth: "fit-content", margin: "0 auto"}}
-                            inputStyle={{borderRadius: "4px", border: "2px solid #374a5c", backgroundColor: "#9db0c2", font: "400 22px Arial", height: "4vh", width: "4vh", padding: "1vh"}}
+                            inputStyle={{borderRadius: "4px", border: "2px solid #374a5c", backgroundColor: "#9db0c2", fontSize: "22px", height: "5vh", width: "5vh", padding: "1vh"}}
                             inputFocusStyle={{borderRadius: "4px", backgroundColor: "#52708a"}}
                             onComplete={(value, index) => {}}
                             autoSelect={true}

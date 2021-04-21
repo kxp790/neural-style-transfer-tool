@@ -27,7 +27,7 @@ const ContentLayerSelectionItem = () => {
     }
 
     return (
-        <div className="model-item-container">
+        <div className="model-item-container large">
             <ModelDesignContext.Consumer>
                 {({layers}) => (
                     <div>

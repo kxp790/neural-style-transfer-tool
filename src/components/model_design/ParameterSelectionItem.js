@@ -27,7 +27,7 @@ const Parameter = (props) => {
 const ParameterSelectionItem = () => {
     
     return (
-        <div className="model-item-container">
+        <div className="model-item-container small">
             <ModelDesignContext.Consumer>
                 {({contentWeight, setContentWeight, styleWeight, setStyleWeight, numOfIterations, setNumOfIterations}) => (
                     <div>

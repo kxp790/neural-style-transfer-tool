@@ -23,7 +23,7 @@ const ResultPage = () => {
   }
 
   return (
-    shouldLoad() ? <PropagateLoader /> : <div className="cards">
+    shouldLoad() ? <PropagateLoader style={{paddingTop: "30vh"}}/> : <div className="cards">
       <ImageWrapper src={'http://localhost:5000/input/' + design.id + '.jpg'} title="BEFORE" />
       <ImageWrapper src={'http://localhost:5000/output/' + design.id + '.jpg'} title="AFTER" />
     </div>

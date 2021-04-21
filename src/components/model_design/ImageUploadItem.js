@@ -15,7 +15,7 @@ function Basic(props) {
     <section className="drop-container">
       <div style={{padding: "5vh", width: "70%", margin: "0 auto", minWidth: "fit-content", borderStyle: "dashed", borderWidth: "1px", borderRadius: "2px"}} {...getRootProps({className: 'dropzone'})}>
         <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        <p>drag 'n' drop / click to select a content image</p>
       </div>
     </section>
   )
@@ -50,11 +50,11 @@ const ImageInputItem = () => {
   }
 
   return(
-    <div style={{paddingTop: "20vh"}}>
-        <Basic onChange={(file) => updateImage(file)}/>
-        <div style={{maxWidth: "125px", paddingTop: "5vh", margin: "0 auto"}}>
-          {!hasSelectedContentImage ? null : <img src={'http://localhost:5000/input/' + design.id + '.jpg?' + imgHash} style={{maxWidth: "125px", borderStyle: "dotted", borderWidth: "1px", borderRadius: "2px"}} />}
-        </div>
+    <div className="model-item-container small">
+      <Basic onChange={(file) => updateImage(file)}/>
+      <div style={{maxWidth: "125px", paddingTop: "5vh", margin: "0 auto"}}>
+        {!hasSelectedContentImage ? null : <img src={'http://localhost:5000/input/' + design.id + '.jpg?' + imgHash} style={{maxWidth: "125px", borderStyle: "dotted", borderWidth: "1px", borderRadius: "2px"}} />}
+      </div>
     </div>
   )
 }

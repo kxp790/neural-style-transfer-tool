@@ -7,7 +7,7 @@ import { ProgressBar, Step } from 'react-step-progress-bar'
 import "react-step-progress-bar/styles.css"
 import { AppContext } from '../AppContext'
 import ContentLayerSelectionItem from './ContentLayerSelectionItem'
-import ImageInputItem from './ImageInputItem'
+import ImageUploadItem from './ImageUploadItem'
 import { ModelDesignContext } from './ModelDesignContext'
 import ParameterSelectionItem from './ParameterSelectionItem'
 import StyleLayerSelectionItem from './StyleLayerSelectionItem'
@@ -34,7 +34,7 @@ const StepProgressItem = (props) => {
 
     // list of steps in step progress
     const steps = [
-        <ImageInputItem />,
+        <ImageUploadItem />,
         <StyleSelectionItem />,
         <ContentLayerSelectionItem />,
         <StyleLayerSelectionItem />,
@@ -61,7 +61,8 @@ const StepProgressItem = (props) => {
     // image input step validator
     // true if image exists in database
     const imageInputValidator = () => {
-        return hasSelectedContentImage
+        // return hasSelectedContentImage
+        return true
     }
 
     // style image selection step validator
@@ -79,7 +80,7 @@ const StepProgressItem = (props) => {
     // style layer selection step validator
     // true if at least one layer is selected and weight value is larger than 0 and smaller than 1
     const styleLayerSelectionValidator = () => {
-        if(selectedStyleLayers.length === 0) return false
+        if(selectedStyleLayers.length !== 5) return false
         for (let layer in selectedStyleLayers) {
             if(styleLayerWeights[selectedStyleLayers[layer]] <= 0 || styleLayerWeights[selectedStyleLayers[layer]] >= 1) return false
         }
@@ -145,22 +146,22 @@ const StepProgressItem = (props) => {
             <ProgressBar percent={currentStep / 4 * 100} filledBackground="linear-gradient(to right, #00a5a7, #00a5a7)">
                 <Step>
                     {({ accomplished }) => (
-                        <ProgressStep number={1} text="Upload Image" accomplished={accomplished} />
+                        <ProgressStep number={1} text="Content Image" accomplished={accomplished} />
                     )}
                 </Step>
                 <Step>
                     {({ accomplished }) => (
-                        <ProgressStep number={2} text="Select Style" accomplished={accomplished} />
+                        <ProgressStep number={2} text="Style Image" accomplished={accomplished} />
                     )}
                 </Step>
                 <Step>
                     {({ accomplished }) => (
-                        <ProgressStep number={3} text="Select Content Layer" accomplished={accomplished} />
+                        <ProgressStep number={3} text="Content Layer" accomplished={accomplished} />
                     )}
                 </Step>
                 <Step>
                     {({ accomplished }) => (
-                        <ProgressStep number={4} text="Select Style Layers" accomplished={accomplished} />
+                        <ProgressStep number={4} text="Style Layers" accomplished={accomplished} />
                     )}
                 </Step>
                 <Step>

@@ -6,7 +6,7 @@ const StyleLayerWeight = (props) => {
         <table className={props.isEnabled ? "parameter-table enabled" : "parameter-table"} >
             <tbody>
                 <tr>
-                    <td className="cell-width">
+                    <td>
                         <p className="name-box" onClick={props.onPick} style={{cursor: "pointer"}}>{props.layer}</p>
                     </td>
                     <td>
@@ -30,7 +30,7 @@ const StyleLayerSelectionItem = () => {
     }
 
     return (
-        <div className="model-item-container">
+        <div className="model-item-container large">
             <ModelDesignContext.Consumer>
                 {({styleLayerWeights, setStyleLayerWeight}) => (
                     <div>
