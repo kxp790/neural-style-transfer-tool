@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { AppContext } from './AppContext'
 import { ModelDesignContext } from './model_design/ModelDesignContext'
-import StepProgressItem from './model_design/StepProgressItem'
+import StepProgress from './model_design/StepProgress'
 
 const ModelDesignPage = () => {
     // context
@@ -63,7 +63,7 @@ const ModelDesignPage = () => {
             styleWeight, setStyleWeight,
             numOfIterations, setNumOfIterations, 
             design, layers}}>
-            <StepProgressItem />
+            <StepProgress />
         </ModelDesignContext.Provider>
     )
 }

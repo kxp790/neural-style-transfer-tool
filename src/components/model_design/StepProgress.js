@@ -6,12 +6,12 @@ import { withRouter } from 'react-router-dom'
 import { ProgressBar, Step } from 'react-step-progress-bar'
 import "react-step-progress-bar/styles.css"
 import { AppContext } from '../AppContext'
-import ContentLayerSelectionItem from './ContentLayerSelectionItem'
-import ImageUploadItem from './ImageUploadItem'
+import ContentLayerSelectionStep from './ContentLayerSelectionStep'
+import ImageUploadStep from './ImageUploadStep'
 import { ModelDesignContext } from './ModelDesignContext'
-import ParameterSelectionItem from './ParameterSelectionItem'
-import StyleLayerSelectionItem from './StyleLayerSelectionItem'
-import StyleSelectionItem from './StyleSelectionItem'
+import ParameterSelectionStep from './ParameterSelectionStep'
+import StyleLayerSelectionStep from './StyleLayerSelectionStep'
+import StyleSelectionStep from './StyleSelectionStep'
 
 const ProgressStep = (props) => {
     return (
@@ -26,7 +26,7 @@ const ProgressStep = (props) => {
     )
 }
 
-const StepProgressItem = (props) => {
+const StepProgress = (props) => {
     // context
     const { design, setDesign, setHasResult } = useContext(AppContext)
     const { layers, hasSelectedContentImage, selectedStyleImage, selectedContentLayer, selectedStyleLayers, styleLayerWeights, 
@@ -34,11 +34,11 @@ const StepProgressItem = (props) => {
 
     // list of steps in step progress
     const steps = [
-        <ImageUploadItem />,
-        <StyleSelectionItem />,
-        <ContentLayerSelectionItem />,
-        <StyleLayerSelectionItem />,
-        <ParameterSelectionItem />
+        <ImageUploadStep />,
+        <StyleSelectionStep />,
+        <ContentLayerSelectionStep />,
+        <StyleLayerSelectionStep />,
+        <ParameterSelectionStep />
     ]
     
     // keep track of step 
@@ -187,4 +187,4 @@ const StepProgressItem = (props) => {
     )
 }
 
-export default withRouter(StepProgressItem)
+export default withRouter(StepProgress)

@@ -6,8 +6,8 @@ const Parameter = (props) => {
         <table className="parameter-table">
             <tbody>
                 <tr>
-                    <td className="cell-width">
-                        <p className="name-box">{props.name}</p>
+                    <td>
+                        <p className="name-box parameter">{props.name}</p>
                     </td>
                     <td>
                         <input className={(/^[1-9][0-9]?$|^100$/).test(props.value) ? "weight-box" : "weight-box invalid"} value={props.value} onChange={props.onChange} type="text" maxLength={props.maxLength} pattern={props.pattern} required></input>
@@ -24,10 +24,11 @@ const Parameter = (props) => {
     )
 }
 
-const ParameterSelectionItem = () => {
+const ParameterSelectionStep = () => {
     
     return (
-        <div className="model-item-container small">
+        <div className="model-design-step-container small">
+            <h4 style={{textShadow: "1px 1px black"}}>CUSTOMISE PARAMETERS:</h4>
             <ModelDesignContext.Consumer>
                 {({contentWeight, setContentWeight, styleWeight, setStyleWeight, numOfIterations, setNumOfIterations}) => (
                     <div>
@@ -41,4 +42,4 @@ const ParameterSelectionItem = () => {
     )
 }
 
-export default ParameterSelectionItem
+export default ParameterSelectionStep

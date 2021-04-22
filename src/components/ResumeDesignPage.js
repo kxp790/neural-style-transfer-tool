@@ -85,7 +85,7 @@ const ResumeDesignPage = () => {
         }).catch((error) => console.log(error))
 
         if(response.status === 200) {
-            var designResponse = await axios.get('http://localhost:5000/get_design/' + inputDesignId, {
+            var designResponse = await axios.get('http://localhost:5000/get_design_by_id/' + inputDesignId, {
             headers: {
                 'Access-Control-Allow-Origin': 'http://localhost:3000'
             }

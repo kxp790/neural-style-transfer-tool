@@ -15,7 +15,7 @@ const ContentLayer = (props) => {
     )
 }
 
-const ContentLayerSelectionItem = () => {
+const ContentLayerSelectionStep = () => {
     // context
     const { selectedContentLayer, setSelectedContentLayer } = useContext(ModelDesignContext)
 
@@ -27,7 +27,8 @@ const ContentLayerSelectionItem = () => {
     }
 
     return (
-        <div className="model-item-container large">
+        <div className="model-design-step-container large">
+            <h4 style={{textShadow: "1px 1px black"}}>SELECT A CONTENT LAYER:</h4>
             <ModelDesignContext.Consumer>
                 {({layers}) => (
                     <div>
@@ -44,4 +45,4 @@ const ContentLayerSelectionItem = () => {
     )
 }
 
-export default ContentLayerSelectionItem
+export default ContentLayerSelectionStep

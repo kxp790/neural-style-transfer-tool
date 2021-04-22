@@ -103,24 +103,28 @@ def save_image():
             file.save(os.path.join(app.config['INPUT_FOLDER'], file.filename))
             copyfile(INPUT_FOLDER + '/' + file.filename, OUTPUT_FOLDER + '/' + file.filename)
             return Response(status=200)
+    return Response(status=500)
 
 # get styled image
 @app.route('/style_transfer/<string:design_id>')
 @cross_origin()
 def style_transfer(design_id):
     model.style_transfer(design_id, 'stained-glass')
+    # TODO - check if image exists in output folder
     return Response(status=200)
 
 # get input image
-@app.route('/input/<string:image_name>', methods=['GET'])
+@app.route('/get_input_image/<string:image_name>', methods=['GET'])
 @cross_origin()
 def get_input_image(image_name):
+    # TODO - check if image exists in input folder, 404 if not found
     return send_file(INPUT_FOLDER + '/' + image_name)
 
 # get output image
-@app.route('/output/<string:image_name>', methods=['GET'])
+@app.route('/get_output_image/<string:image_name>', methods=['GET'])
 @cross_origin()
 def get_output_image(image_name):
+    # TODO - check if image exists in output folder, 404 if not found
     return send_file(OUTPUT_FOLDER + '/' + image_name)
 
 # check if design and pin combo exists
@@ -130,15 +134,22 @@ def check_design_with_pin():
     design_id = request.json['design_id']
     pin = request.json['pin']
     pin_data = db.pins.find_one({'id': design_id, 'pin': int(pin)})
-    return Response(status=200) if json.loads(json_util.dumps(pin_data)) else Response(status=404)
+    return Response(status=200) if json.loads(json_util.dumps(pin_data)) else Response(status=401)
 
 # get design by id
-@app.route('/get_design/<string:design_id>')
+@app.route('/get_design_by_id/<string:design_id>')
 @cross_origin()
 def get_design_by_id(design_id):
     design_data = db.designs.find_one({"id": design_id})
     design_json = json_util.dumps(design_data)
     return Response(status=200, response=design_json) if json.loads(json_util.dumps(design_json)) else Response(status=404)
+
+# update pin
+@app.route('/update_pin', methods=['POST'])
+@cross_origin()
+def update_pin():
+    # TODO - everything
+    return Response(status=200)
 
 # update existing design
 @app.route('/update_design', methods=['POST'])
@@ -179,4 +190,5 @@ def create_design():
     db.pins.insert_one(pin_data)
     # return created design without Object id
     design_data['_id'] = ''
+    # TODO - 200 and 400
     return design_data

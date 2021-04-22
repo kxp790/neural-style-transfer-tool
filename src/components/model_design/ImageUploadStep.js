@@ -21,7 +21,7 @@ function Basic(props) {
   )
 }
 
-const ImageInputItem = () => {
+const ImageInputStep = () => {
   const { design } = useContext(AppContext)
   const [ image, setImage ] = useState()
   const { hasSelectedContentImage, setHasSelectedContentImage } = useContext(ModelDesignContext)
@@ -50,7 +50,7 @@ const ImageInputItem = () => {
   }
 
   return(
-    <div className="model-item-container small">
+    <div className="model-design-step-container small">
       <Basic onChange={(file) => updateImage(file)}/>
       <div style={{maxWidth: "125px", paddingTop: "5vh", margin: "0 auto"}}>
         {!hasSelectedContentImage ? null : <img src={'http://localhost:5000/input/' + design.id + '.jpg?' + imgHash} style={{maxWidth: "125px", borderStyle: "dotted", borderWidth: "1px", borderRadius: "2px"}} />}
@@ -59,4 +59,4 @@ const ImageInputItem = () => {
   )
 }
 
-export default ImageInputItem
+export default ImageInputStep

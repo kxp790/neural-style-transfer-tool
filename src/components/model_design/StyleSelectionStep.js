@@ -4,7 +4,7 @@ import style_1 from '../../images/painting.png'
 import style_2 from '../../images/stained-glass.jpg'
 import style_3 from '../../images/placeholder.png'
 
-const StyleSelectionItem = () => {
+const StyleSelectionStep = () => {
     // list of style options
     const styles = ['painting.png', 'stained-glass.jpg', 'placeholder.png']
 
@@ -17,8 +17,8 @@ const StyleSelectionItem = () => {
     }
 
     return(
-        <div className="model-item-container small">
-            <p style={{padding: "1vh"}}>Choose a style image:</p>
+        <div className="model-design-step-container small">
+            <h4 style={{textShadow: "1px 1px black"}}>SELECT A STYLE IMAGE:</h4>
             <table className="style-image-table">
                 <tbody>
                     <tr>
@@ -38,4 +38,4 @@ const StyleSelectionItem = () => {
     )
 }
 
-export default StyleSelectionItem
+export default StyleSelectionStep

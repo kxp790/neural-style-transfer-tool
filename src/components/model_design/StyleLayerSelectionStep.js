@@ -18,7 +18,7 @@ const StyleLayerWeight = (props) => {
     )
 }
 
-const StyleLayerSelectionItem = () => {
+const StyleLayerSelectionStep = () => {
     const { selectedStyleLayers, setSelectedStyleLayers } = useContext(ModelDesignContext)
 
     const toggleLayer = (layer) => {
@@ -30,7 +30,8 @@ const StyleLayerSelectionItem = () => {
     }
 
     return (
-        <div className="model-item-container large">
+        <div className="model-design-step-container large">
+            <h4 style={{textShadow: "1px 1px black"}}>SELECT A STYLE LAYER:</h4>
             <ModelDesignContext.Consumer>
                 {({styleLayerWeights, setStyleLayerWeight}) => (
                     <div>
@@ -50,4 +51,4 @@ const StyleLayerSelectionItem = () => {
     )
 }
 
-export default StyleLayerSelectionItem
+export default StyleLayerSelectionStep
