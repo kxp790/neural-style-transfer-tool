@@ -105,27 +105,37 @@ def save_image():
             return Response(status=200)
     return Response(status=500)
 
-# get styled image
-@app.route('/style_transfer/<string:design_id>')
-@cross_origin()
-def style_transfer(design_id):
-    model.style_transfer(design_id, 'stained-glass')
-    # TODO - check if image exists in output folder
-    return Response(status=200)
-
 # get input image
 @app.route('/get_input_image/<string:image_name>', methods=['GET'])
 @cross_origin()
 def get_input_image(image_name):
     # TODO - check if image exists in input folder, 404 if not found
-    return send_file(INPUT_FOLDER + '/' + image_name)
+    return send_file(INPUT_FOLDER + '/' + image_name) if os.path.isfile(INPUT_FOLDER + '/' + image_name) else redirect('http://localhost:3000')
 
 # get output image
-@app.route('/get_output_image/<string:image_name>', methods=['GET'])
+@app.route('/get_output_image/<string:image_name>', methods=['GET']) 
 @cross_origin()
 def get_output_image(image_name):
     # TODO - check if image exists in output folder, 404 if not found
-    return send_file(OUTPUT_FOLDER + '/' + image_name)
+    return send_file(OUTPUT_FOLDER + '/' + image_name) if os.path.isfile(OUTPUT_FOLDER + '/' + image_name) else redirect('http://localhost:3000')
+
+# create new design  
+@app.route('/create_design')
+@cross_origin()
+def create_design():
+    # create new unique design_id
+    design_id = get_new_design_id()
+    # insert new design
+    design_data = deepcopy(design_data_default)
+    design_data.update(id=design_id)
+    db.designs.insert_one(design_data)
+    # insert new pin
+    pin_data = deepcopy(pin_data_default)
+    pin_data.update(id=design_id)
+    db.pins.insert_one(pin_data)
+    # return created design 
+    design_json = json_util.dumps(design_data)
+    return Response(status=200, response=design_json) if json.loads(design_json) else Response(status=404)
 
 # check if design and pin combo exists
 @app.route('/check_design_with_pin', methods=['POST'])
@@ -134,15 +144,11 @@ def check_design_with_pin():
     design_id = request.json['design_id']
     pin = request.json['pin']
     pin_data = db.pins.find_one({'id': design_id, 'pin': int(pin)})
-    return Response(status=200) if json.loads(json_util.dumps(pin_data)) else Response(status=401)
-
-# get design by id
-@app.route('/get_design_by_id/<string:design_id>')
-@cross_origin()
-def get_design_by_id(design_id):
+    if not (json.loads(json_util.dumps(pin_data))):
+        return Response(status=401)
     design_data = db.designs.find_one({"id": design_id})
     design_json = json_util.dumps(design_data)
-    return Response(status=200, response=design_json) if json.loads(json_util.dumps(design_json)) else Response(status=404)
+    return Response(status=200, response=design_json) if json.loads(design_data) else Response(status=500)
 
 # update pin
 @app.route('/update_pin', methods=['POST'])
@@ -151,7 +157,7 @@ def update_pin():
     # TODO - everything
     return Response(status=200)
 
-# update existing design
+# update design
 @app.route('/update_design', methods=['POST'])
 @cross_origin()
 def update_design():
@@ -172,23 +178,11 @@ def update_design():
     }})
     design_data = db.designs.find_one({"id": design_id})
     design_json = json_util.dumps(design_data)
-    return Response(status=200, response=design_json) if json.loads(json_util.dumps(design_json)) else Response(status=404)
+    return Response(status=200, response=design_json) if json.loads(design_json) else Response(status=404)
     
-# insert new design  
-@app.route('/create_design')
+# get styled image
+@app.route('/style_transfer/<string:design_id>')
 @cross_origin()
-def create_design():
-    # create new unique design_id
-    design_id = get_new_design_id()
-    # insert new design
-    design_data = deepcopy(design_data_default)
-    design_data.update(id=design_id)
-    db.designs.insert_one(design_data)
-    # insert new pin
-    pin_data = deepcopy(pin_data_default)
-    pin_data.update(id=design_id)
-    db.pins.insert_one(pin_data)
-    # return created design without Object id
-    design_data['_id'] = ''
-    # TODO - 200 and 400
-    return design_data
+def style_transfer(design_id):
+    model.style_transfer(design_id, 'stained-glass')
+    return Response(status=200) if os.path.isfile(OUTPUT_FOLDER + '/' + image_name) else Response(status=404)

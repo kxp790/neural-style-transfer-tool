@@ -85,21 +85,10 @@ const ResumeDesignPage = () => {
         }).catch((error) => console.log(error))
 
         if(response.status === 200) {
-            var designResponse = await axios.get('http://localhost:5000/get_design_by_id/' + inputDesignId, {
-            headers: {
-                'Access-Control-Allow-Origin': 'http://localhost:3000'
-            }
-            }).catch((error) => console.log(error))
-
-            if(designResponse.status === 200) {
-                delete designResponse.data['_id']
-                await setDesign(designResponse.data)
-                return true
-            }
-        } else {
-            console.log(response.status)
+            delete response.data['_id']
+            await setDesign(response.data)
+            return true
         }
-
         return false
     }
 
