@@ -53,7 +53,7 @@ const ImageInputStep = () => {
     <div className="model-design-step-container small">
       <Basic onChange={(file) => updateImage(file)}/>
       <div style={{maxWidth: "125px", paddingTop: "5vh", margin: "0 auto"}}>
-        {!hasSelectedContentImage ? null : <img src={'http://localhost:5000/input/' + design.id + '.jpg?' + imgHash} style={{maxWidth: "125px", borderStyle: "dotted", borderWidth: "1px", borderRadius: "2px"}} />}
+        {!hasSelectedContentImage ? null : <img src={'http://localhost:5000/get_input_image/' + design.id + '.jpg?' + imgHash} style={{maxWidth: "125px", borderStyle: "dotted", borderWidth: "1px", borderRadius: "2px"}} />}
       </div>
     </div>
   )

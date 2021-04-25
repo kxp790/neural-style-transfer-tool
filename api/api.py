@@ -148,7 +148,7 @@ def check_design_with_pin():
         return Response(status=401)
     design_data = db.designs.find_one({"id": design_id})
     design_json = json_util.dumps(design_data)
-    return Response(status=200, response=design_json) if json.loads(design_data) else Response(status=500)
+    return Response(status=200, response=design_json) if json.loads(design_json) else Response(status=500)
 
 # update pin
 @app.route('/update_pin', methods=['POST'])
