@@ -33,10 +33,12 @@ const NewDesignPage = (props) => {
         <div style={{paddingTop: "20vh"}}>
             <AppContext.Consumer>
                 {({design}) => (
-                    design === undefined ? <PropogateLoader style={{paddingTop: "10vh"}} /> :
+                    design === undefined ? <PropogateLoader /> :
                     <>
                         <h4 className="caption-box">YOUR DESIGN ID:</h4>
-                        <h1 className="input-text-box">{design.id}</h1>
+                        <div style={{paddingBottom: "1vh"}}>
+                            <p className="input-text-box">{design.id}</p>
+                        </div>
                         <h4 className="caption-box">CHOOSE A PIN:</h4>
                         <PinInput 
                             className="pad-pin"

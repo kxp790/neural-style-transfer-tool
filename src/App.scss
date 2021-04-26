@@ -108,7 +108,7 @@ body {
 
   img {
     max-height: 50vh;
-    max-width: 50vw;
+    max-width: 30vw;
     margin: 2vw;
   }
 }
@@ -155,6 +155,10 @@ body {
   &.button2:hover {
     background-color: $secondary_1;
   }
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .pad-pin {
@@ -183,14 +187,21 @@ body {
 
 .input-text-box {
   font-size: 26px;
+  font-weight: bold;
+  color: azure;
+  text-shadow: 1px 1px $primary_6;
   width: 200px;
   height: fit-content;
-  padding: 1vh 1vh;
+  padding: 0.7vh 0.7vh;
   text-align: center;
-  background-color: $primary_10;
+  background-color: $primary_8;
   border-radius: 5px;
   border: 2px solid $primary_3 !important;
   margin: 0 auto;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .style-image-table {
@@ -359,4 +370,8 @@ body {
   .content {
     flex-grow: 1;
   }
+}
+
+.css-9ebb9a {
+  padding-top: 10vh;
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import PropagateLoader from 'react-spinners/PropagateLoader'
 import { AppContext } from './AppContext'
 import { Link, withRouter } from 'react-router-dom'
@@ -18,7 +18,7 @@ const ResultPage = () => {
   const { design, hasResult } = useContext(AppContext)
 
   useEffect(() => {
-    
+    shouldLoad()
   }, [hasResult])
 
   const shouldLoad = () => {
@@ -26,7 +26,7 @@ const ResultPage = () => {
   }
 
   return (
-    shouldLoad() ? <PropagateLoader style={{paddingTop: "30vh"}}/> : 
+    shouldLoad() ? <div style={{paddingTop: "30vh"}}><PropagateLoader /></div> : 
     <>
       {/* <Link to="/model" className="button button2"><FontAwesomeIcon icon={faArrowLeft} /> Update Parameters</Link> */}
       <Link to="/model" className="links"><FontAwesomeIcon icon={faArrowLeft} /> Update Parameters</Link>

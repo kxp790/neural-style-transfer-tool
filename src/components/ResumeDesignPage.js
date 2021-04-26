@@ -1,9 +1,8 @@
 import axios from 'axios'
-import React, { useContext, useEffect, useState, useRef } from 'react'
+import React, { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import PinInput from 'react-pin-input'
 import { AppContext } from './AppContext'
-import { ModelDesignContext } from './model_design/ModelDesignContext'
 
 const DesignIdForm = ({ handleEditModel, handleSeeResult, onDesignIdChange, onPinChange }) => {
 
@@ -20,7 +19,7 @@ const DesignIdForm = ({ handleEditModel, handleSeeResult, onDesignIdChange, onPi
     return(
         <>
             <h4 className="caption-box">INSERT DESIGN ID:</h4>
-            <div style={{paddingBottom: "2vh"}}>
+            <div style={{paddingBottom: "1vh"}}>
                 <input className="input-text-box" type="text" required maxLength="6" pattern="[a-z0-9]{6}" onChange={handleDesignIdChange} />
             </div>
             <h4 className="caption-box">INSERT PIN:</h4>
@@ -47,7 +46,7 @@ const DesignIdForm = ({ handleEditModel, handleSeeResult, onDesignIdChange, onPi
 
 const ResumeDesignPage = () => {
     // context 
-    const { design, setDesign, setHasResult } = useContext(AppContext)
+    const { setDesign, setHasResult } = useContext(AppContext)
     
     // input storing variables
     const [ inputDesignId, setInputDesignId ] = useState('')
@@ -59,6 +58,7 @@ const ResumeDesignPage = () => {
         if(await validateInput()) {
             history.push('/model')
         } else { 
+            history.push('/resume_design')
             console.log("Validation unsuccessful")
         }
     }
@@ -68,6 +68,7 @@ const ResumeDesignPage = () => {
             setHasResult(true)
             history.push('/result')
         } else { 
+            history.push('/resume_design')
             console.log("Validation unsuccessful")
         }
     }

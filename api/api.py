@@ -23,6 +23,8 @@ CORS(app)
 mongodb_client = PyMongo(app, uri="mongodb://localhost:27017/styleTransferDB")
 db = mongodb_client.db
 
+JPG = 'jpg'
+
 # path to inputs
 INPUT_FOLDER = 'data/input'
 app.config['INPUT_FOLDER'] = INPUT_FOLDER
@@ -185,4 +187,4 @@ def update_design():
 @cross_origin()
 def style_transfer(design_id):
     model.style_transfer(design_id, 'stained-glass')
-    return Response(status=200) if os.path.isfile(OUTPUT_FOLDER + '/' + image_name) else Response(status=404)
+    return Response(status=200) if os.path.isfile(OUTPUT_FOLDER + '/' + image_name + JPG) else Response(status=404)
