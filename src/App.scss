@@ -158,6 +158,14 @@ body {
   &:focus {
     outline: none;
   }
+
+  &:disabled {
+    background-color: transparent;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
 }
 
 .pad-pin {
