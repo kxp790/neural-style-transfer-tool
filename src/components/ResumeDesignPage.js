@@ -5,6 +5,8 @@ import React, { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import PinInput from 'react-pin-input'
 import { AppContext } from './AppContext'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ResumeDesignPage = () => {
     // context 
@@ -17,18 +19,26 @@ const ResumeDesignPage = () => {
     const [ inputDesignIdIsValid, setInputDesignIdIsValid ] = useState(false)
     const [ inputPinIsValid, setInputPinIsValid ] = useState(false)
 
-    const [ displayErrorMessage, setDisplayErrorMessage ] = useState(false)
-
     const designIdExp = new RegExp('^[a-z0-9]{6}$');
     const pinExp = new RegExp('^[0-9]{4}$');
     
+    const displayErrorToast = () => toast.error('Invalid design id and/or pin!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+
     const history = useHistory()
 
     const handleEditModel = async () => {
         if(await validateInput()) {
             history.push('/model')
         } else { 
-            setDisplayErrorMessage(true)
+            displayErrorToast()
             console.log("Validation unsuccessful")
         }
     }
@@ -38,7 +48,7 @@ const ResumeDesignPage = () => {
             setHasResult(true)
             history.push('/result')
         } else { 
-            setDisplayErrorMessage(true)
+            displayErrorToast()
             console.log("Validation unsuccessful")
         }
     }
@@ -96,7 +106,7 @@ const ResumeDesignPage = () => {
             <button type="submit" className="button button2" disabled={!inputDesignIdIsValid || !inputPinIsValid} onClick={handleEditModel}>Edit model</button>
             <p style={{padding: "0vh 1vh", display: "inline"}}>/</p>
             <button type="submit" className="button button1" disabled={!inputDesignIdIsValid || !inputPinIsValid} onClick={handleSeeResult}>See result</button>
-            {displayErrorMessage ? <p style={{color: "red", padding: "1vh"}}>INVALID DESIGN ID AND/OR PIN</p> : ""}
+            <ToastContainer/>
         </div>
     )
 }
