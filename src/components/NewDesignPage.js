@@ -8,14 +8,25 @@ import PropogateLoader from 'react-spinners/PropagateLoader'
 import { AppContext } from './AppContext'
 
 const NewDesignPage = (props) => {
-    const { setDesign } = useContext(AppContext)
+    const { design, setDesign } = useContext(AppContext)
 
     const [ inputPin, setInputPin ] = useState(1234)
     const [ inputPinIsValid, setInputPinIsValid ] = useState(true)
     const pinExp = new RegExp('^[0-9]{4}$');
 
     // function to call api to save new pin to database
-    const savePin = () => {
+    const savePin = async () => {
+        const res = await axios.post('http://localhost:5000/update_pin', {
+            design_id: design.id,
+            pin: inputPin
+        }, {
+            headers: {
+                'Access-Control-Allow-Origin': 'http://localhost:3000'
+            }
+        }).then((response) => {
+            delete response.data['_id']
+            setDesign(response.data)
+        }).catch((error) => console.log(error))
         props.history.push("/model")
     }
 

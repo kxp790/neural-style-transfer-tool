@@ -156,8 +156,12 @@ def check_design_with_pin():
 @app.route('/update_pin', methods=['POST'])
 @cross_origin()
 def update_pin():
-    # TODO - everything
-    return Response(status=200)
+    design_id = request.json['design_id']
+    pin = request.json['pin']
+    db.pins.find_and_modify(query={'id': design_id}, update={"$set": {'pin': pin}})
+    design_data = db.designs.find_one({"id": design_id})
+    design_json = json_util.dumps(design_data)
+    return Response(status=200, response=design_json) if json.loads(design_json) else Response(status=404)
 
 # update design
 @app.route('/update_design', methods=['POST'])
