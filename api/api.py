@@ -149,8 +149,16 @@ def check_design_with_pin():
     if not (json.loads(json_util.dumps(pin_data))):
         return Response(status=401)
     design_data = db.designs.find_one({"id": design_id})
+
+    response_data = dict(
+        design = design_data,
+        hasImage = os.path.isfile(INPUT_FOLDER + '/' + design_id + JPG)
+    )
+
     design_json = json_util.dumps(design_data)
-    return Response(status=200, response=design_json) if json.loads(design_json) else Response(status=500)
+    response_json = json_util.dumps(response_data)
+
+    return Response(status=200, response=response_json) if json.loads(design_json) else Response(status=500)
 
 # update pin
 @app.route('/update_pin', methods=['POST'])
@@ -188,8 +196,11 @@ def update_design():
     
 # get styled image
 @app.route('/style_transfer/<string:design_id>')
-@cross_origin()
+@cross_origin('http://localhost:3000/model')
 def style_transfer(design_id):
-    print(os.path.isfile(OUTPUT_FOLDER + '/' + design_id + JPG))
-    model.style_transfer(design_id, 'stained-glass')
+    design_data = db.designs.find_one({"id": design_id})
+    design_parameters = {}
+    for parameter in design_data:
+        design_parameters[parameter] = design_data[parameter]
+    model.style_transfer(design_parameters)
     return Response(status=200) if os.path.isfile(OUTPUT_FOLDER + '/' + design_id + JPG) else Response(status=404)
