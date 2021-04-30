@@ -88,7 +88,7 @@ def get_new_design_id():
 
 # save uploaded image
 @app.route('/upload_image', methods=['POST'])
-@cross_origin()
+@cross_origin(origin='http://localhost:3000/model')
 def save_image():
     if request.method == 'POST':
         # check if has the file
@@ -122,8 +122,8 @@ def get_output_image(image_name):
     return send_file(OUTPUT_FOLDER + '/' + image_name) if os.path.isfile(OUTPUT_FOLDER + '/' + image_name) else redirect('http://localhost:3000')
 
 # create new design  
-@app.route('/create_design')
-@cross_origin()
+@app.route('/create_design', methods=['GET'])
+@cross_origin(origin='http://localhost:3000/new_design')
 def create_design():
     # create new unique design_id
     design_id = get_new_design_id()
@@ -141,7 +141,7 @@ def create_design():
 
 # check if design and pin combo exists
 @app.route('/check_design_with_pin', methods=['POST'])
-@cross_origin()
+@cross_origin(origin='http://localhost:3000/resume_design')
 def check_design_with_pin():
     design_id = request.json['design_id']
     pin = request.json['pin']
@@ -162,7 +162,7 @@ def check_design_with_pin():
 
 # update pin
 @app.route('/update_pin', methods=['POST'])
-@cross_origin()
+@cross_origin(origin='http://localhost:3000/new_design')
 def update_pin():
     design_id = request.json['design_id']
     pin = request.json['pin']
@@ -173,7 +173,7 @@ def update_pin():
 
 # update design
 @app.route('/update_design', methods=['POST'])
-@cross_origin()
+@cross_origin(origin='http://localhost:3000/model')
 def update_design():
     design_id = request.json['design_id']
     style_image_name = request.json['style_image_name']
@@ -195,8 +195,8 @@ def update_design():
     return Response(status=200, response=design_json) if json.loads(design_json) else Response(status=404)
     
 # get styled image
-@app.route('/style_transfer/<string:design_id>')
-@cross_origin('http://localhost:3000/model')
+@app.route('/style_transfer/<string:design_id>', methods=['GET'])
+@cross_origin(origin='http://localhost:3000/model')
 def style_transfer(design_id):
     design_data = db.designs.find_one({"id": design_id})
     design_parameters = {}
