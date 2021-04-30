@@ -9,7 +9,7 @@ function Basic(props) {
     props.onChange(files[0])
   })
 
-  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({onDrop: onDrop, accept: "image/jpg, image/jpeg, image/png"})
+  const { getRootProps, getInputProps } = useDropzone({onDrop: onDrop, accept: "image/jpg, image/jpeg, image/png"})
 
   return (
     <section className="drop-container">
@@ -25,7 +25,6 @@ const ImageInputStep = () => {
   const { design } = useContext(AppContext)
   const [ image, setImage ] = useState()
   const { hasSelectedContentImage, setHasSelectedContentImage } = useContext(ModelDesignContext)
-
   const [ imgHash, setImgHash ] = useState(Date.now())
 
   useEffect(() => {}, [image, hasSelectedContentImage])
@@ -33,17 +32,16 @@ const ImageInputStep = () => {
   const updateImage = (file) => {
     var ext = file.name.split('.')[1]
     var renamedFile = new File([file], `${design.id}.${ext}`, { type: file.type })
-    setImage(renamedFile)
     var data = new FormData()
+    setImage(renamedFile)
     data.append('file', renamedFile)
-
     setHasSelectedContentImage(false)
     axios.post('http://localhost:5000/upload_image', data, {
       headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:3000',
+          'Access-Control-Allow-Origin': 'http://localhost:3000/model',
           'Content-Type': 'multipart/form-data'
       }
-    }).then((response) => {
+    }).then(() => {
       setHasSelectedContentImage(true)
       setImgHash(Date.now())
     }).catch((error) => console.log(error))
@@ -53,7 +51,7 @@ const ImageInputStep = () => {
     <div className="model-design-step-container small">
       <Basic onChange={(file) => updateImage(file)}/>
       <div style={{maxWidth: "125px", paddingTop: "5vh", margin: "0 auto"}}>
-        {!hasSelectedContentImage ? null : <img src={'http://localhost:5000/get_input_image/' + design.id + '.jpg?' + imgHash} style={{maxWidth: "125px", borderStyle: "dotted", borderWidth: "1px", borderRadius: "2px"}} />}
+        {!hasSelectedContentImage ? null : <img onError={(e) => setHasSelectedContentImage(false)} src={'http://localhost:5000/get_input_image/' + design.id + '.jpg?' + imgHash} style={{maxWidth: "125px", borderStyle: "dotted", borderWidth: "1px", borderRadius: "2px"}} alt="" />}
       </div>
     </div>
   )

@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const ResumeDesignPage = () => {
     // context 
     const { setDesign, setHasResult } = useContext(AppContext)
-    
+
     // input storing variables
     const [ inputDesignId, setInputDesignId ] = useState('')
     const [ inputPin, setInputPin ] = useState('')
@@ -19,8 +19,8 @@ const ResumeDesignPage = () => {
     const [ inputDesignIdIsValid, setInputDesignIdIsValid ] = useState(false)
     const [ inputPinIsValid, setInputPinIsValid ] = useState(false)
 
-    const designIdExp = new RegExp('^[a-z0-9]{6}$');
-    const pinExp = new RegExp('^[0-9]{4}$');
+    const designIdExp = new RegExp('^[a-z0-9]{6}$')
+    const pinExp = new RegExp('^[0-9]{4}$')
     
     const displayErrorToast = () => toast.error('Invalid design id and/or pin!', {
         position: "bottom-right",
@@ -36,7 +36,7 @@ const ResumeDesignPage = () => {
 
     const handleEditModel = async () => {
         if(await validateInput()) {
-            history.push('/model')
+            history.push('/model', { isResuming: true })
         } else { 
             displayErrorToast()
             console.log("Validation unsuccessful")
@@ -66,8 +66,8 @@ const ResumeDesignPage = () => {
     // function sends get request with input design id and pin to api to check pair validity and either receives none or the corresponding design
     // if none then displays validation error, if design is returned then sets context design and redirects to model 
     const validateInput = async () => {
-        var successful = false
-        const res = await axios.post('http://localhost:5000/check_design_with_pin', {
+        var isSuccessful = false
+        await axios.post('http://localhost:5000/check_design_with_pin', {
             design_id: inputDesignId,
             pin: inputPin
         }, {
@@ -76,10 +76,10 @@ const ResumeDesignPage = () => {
             }
         }).then((response) => {
             delete response.data['_id']
-            setDesign(response.data)
-            successful = true
+            setDesign(response.data.design)
+            isSuccessful = true
         }).catch((error) => console.log(error))
-        return successful
+        return isSuccessful
     }
 
     return (

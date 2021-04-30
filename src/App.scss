@@ -49,7 +49,7 @@ body {
 
   .logo {
     vertical-align: middle;
-    height: 40px;
+    height: 35px;
   }
 
   .header-links {
@@ -109,6 +109,10 @@ body {
     max-height: 50vh;
     max-width: 30vw;
     margin: 2vw;
+
+    &.small {
+      max-height: 22vh;
+    }
   }
 }
 
@@ -385,4 +389,9 @@ body {
 
 .css-9ebb9a {
   padding-top: 10vh;
+}
+
+.button-bar {
+  display: flex;
+  justify-content: space-between;
 }

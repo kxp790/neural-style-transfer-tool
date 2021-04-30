@@ -1,21 +1,26 @@
 import React, { useContext, useState } from 'react'
+import { useLocation } from 'react-router'
 import { AppContext } from './AppContext'
 import { ModelDesignContext } from './model_design/ModelDesignContext'
 import StepProgress from './model_design/StepProgress'
 
 const ModelDesignPage = () => {
+    const location = useLocation()
+
     // context
     const { design } = useContext(AppContext)
 
     // list of editable convolutional layers in the network
-    const layers = ['block1_conv1', 'block1_conv2', 
-                  'block2_conv1', 'block2_conv2', 
-                  'block3_conv1', 'block3_conv2', 'block3_conv3', 
-                  'block4_conv1', 'block4_conv2', 'block4_conv3', 
-                  'block5_conv1', 'block5_conv2', 'block5_conv3']
+    const layers = [
+        'block1_conv1', 'block1_conv2', 
+        'block2_conv1', 'block2_conv2', 
+        'block3_conv1', 'block3_conv2', 'block3_conv3', 
+        'block4_conv1', 'block4_conv2', 'block4_conv3', 
+        'block5_conv1', 'block5_conv2', 'block5_conv3'
+    ]
 
     // whether the user has uploaded a content image
-    const [ hasSelectedContentImage, setHasSelectedContentImage ] = useState(false)
+    const [ hasSelectedContentImage, setHasSelectedContentImage ] = useState(location.state.isResuming)
 
     // selected style image 
     const [ selectedStyleImage, setSelectedStyleImage ] = useState(design.style_image_name)

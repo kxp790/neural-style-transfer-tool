@@ -61,8 +61,7 @@ const StepProgress = (props) => {
     // image input step validator
     // true if image exists in database
     const imageInputValidator = () => {
-        // return hasSelectedContentImage
-        return true
+        return hasSelectedContentImage
     }
 
     // style image selection step validator
@@ -124,7 +123,7 @@ const StepProgress = (props) => {
             iterations: numOfIterations
         }, {
             headers: {
-                'Access-Control-Allow-Origin': 'http://localhost:3000'
+                'Access-Control-Allow-Origin': 'http://localhost:3000/model'
             }
         }).then((response) => {
             delete response.data['_id']
@@ -132,7 +131,7 @@ const StepProgress = (props) => {
 
             axios.get('http://localhost:5000/style_transfer/' + design.id, {
                 headers: {
-                    'Access-Control-Allow-Origin': 'http://localhost:3000'
+                    'Access-Control-Allow-Origin': 'http://localhost:3000/model'
                 }
             }).then((response) => {
                 setHasResult(true)
