@@ -8,6 +8,7 @@ $primary_7: #6b89a3;
 $primary_8: #7c96ad;
 $primary_9: #8ca3b8;
 $primary_10: #9db0c2;
+$primary_11: #bdcbd6;
 
 $secondary_1: #00b9bc;
 $secondary_2: #00a5a7;
@@ -87,9 +88,11 @@ body {
   min-height: fit-content;
   list-style: none;
   text-decoration: none;
-  padding-top: 5vh;
-  padding-left: 10vw;
+  font-size: 16px;
+  padding: 5vh 10vw;
   color: azure;
+  background-color: transparent;
+  border: none;
   text-shadow: $primary_1;
 }
 
@@ -106,7 +109,7 @@ body {
   }
 
   img {
-    max-height: 50vh;
+    max-height: 30vh;
     max-width: 30vw;
     margin: 2vw;
 
@@ -181,11 +184,11 @@ body {
   width: 80vw;
 
   &.large{
-    padding: 5vh 1vh;
+    padding: 5vh 0vw;
   }
 
   &.small{
-    padding: 20vh 1vh;
+    padding: 20vh 0vw;
   }
 }
 
@@ -256,6 +259,7 @@ body {
 
     &.parameter {
       text-align: right !important;
+      float: right;
       padding: 0vw 1vw;
       min-width: 200px;
     }
@@ -271,6 +275,10 @@ body {
     border-radius: 5px;
     border: 2px solid;
     font-size: 16px !important;
+
+    &.parameter {
+      float: left;
+    }
 
     &.invalid {
       border-color: rgb(201, 17, 17);
@@ -394,4 +402,43 @@ body {
 .button-bar {
   display: flex;
   justify-content: space-between;
+}
+
+.drop-container {
+  max-width: 60vw;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.support-page-container {
+  padding: 10vh 10vw;
+  width: 80vw;
+  margin: 0 auto;
+
+  .accordion {
+    margin: 0 auto;
+    border: transparent;
+
+    .accordion__item {
+      border-radius: 4px;
+      
+      .accordion__heading {
+        
+        .accordion__button {
+          border-radius: 4px;
+          color: azure;
+          background-color: $primary_2;
+        }
+      }
+
+      .accordion__panel {
+        border-radius: 4px;
+        background-color: $primary_3;
+
+        p {
+          text-align: left;
+        }
+      }
+    }
+  }
 }

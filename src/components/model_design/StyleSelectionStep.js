@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import { ModelDesignContext } from './ModelDesignContext'
-import style_1 from '../../images/painting.png'
+import style_1 from '../../images/painting.jpg'
 import style_2 from '../../images/stained-glass.jpg'
-import style_3 from '../../images/placeholder.png'
+import style_3 from '../../images/jeans.jpg'
 
 const StyleSelectionStep = () => {
     // list of style options
-    const styles = ['painting.png', 'stained-glass.jpg', 'placeholder.png']
+    const styles = ['painting.jpg', 'stained-glass.jpg', 'placeholder.jpg']
 
     // context
     const { selectedStyleImage, setSelectedStyleImage } = useContext(ModelDesignContext)

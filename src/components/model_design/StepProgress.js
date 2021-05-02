@@ -176,9 +176,9 @@ const StepProgress = (props) => {
         <div className="model-design">
             <button onClick={regressStep}><FontAwesomeIcon disabled={(currentStep === 0)} icon={faAngleLeft} /></button>
             <div className="content">
-            <div className="progress-bar-container">
-                {progressBar()}   
-            </div>
+                <div className="progress-bar-container">
+                    {progressBar()}   
+                </div>
                 {steps[currentStep]}
             </div>
             <button onClick={progressStep}><FontAwesomeIcon icon={faAngleRight} /></button>

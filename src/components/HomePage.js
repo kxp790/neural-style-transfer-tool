@@ -1,15 +1,18 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import logo from '../images/logo.png'
 
 const HomePage = () => {
+
+    const history = useHistory()
+
     return(
         <div style={{paddingTop: "10vh", height: "20vh"}}>
             <img src={logo} style={{height: "25vh", padding: "5vh"}} alt="" />
             <div></div>
-            <Link to="/new_design" className="button button1">Start New</Link>
+            <button title="start-design-button" className="button button1" onClick={() => history.push("/new_design")}>Start New</button>
             <p style={{padding: "3vh 1vh"}}>OR</p>
-            <Link to="/resume_design" className="button button2">Resume Previous</Link>
+            <button title="resume-design-button" className="button button2" onClick={() => history.push("/resume_design")}>Resume Previous</button>
         </div>
     )
 }

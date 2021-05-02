@@ -36,24 +36,15 @@ app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
 # disable caching
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
-# temporary test image name
-image_name = 'test.jpg'
-
 # default design database entry
 design_data_default = {
     'id' : '',
     'style_image_name' : '',
-    'content_layer' : 'block4_conv2',
-    'style_layers' : {
-        'block1_conv1': 0.2,
-        'block2_conv1': 0.3,
-        'block3_conv1': 0.3,
-        'block4_conv1': 0.10,
-        'block5_conv1': 0.15
-    },
-    'content_weight' : 2,
-    'style_weight' : 3,
-    'iterations' : 50
+    'content_layer' : '',
+    'style_layers' : {},
+    'content_weight' : '',
+    'style_weight' : '',
+    'iterations' : ''
 }
 
 # default pin database entry

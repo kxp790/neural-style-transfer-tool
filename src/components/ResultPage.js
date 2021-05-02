@@ -1,21 +1,28 @@
 import React, { useContext, useEffect } from 'react'
 import PropagateLoader from 'react-spinners/PropagateLoader'
 import { AppContext } from './AppContext'
+import { useHistory } from 'react-router-dom'
 import { Link, withRouter } from 'react-router-dom'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import style_1 from '../images/painting.jpg'
+import style_2 from '../images/stained-glass.jpg'
+import style_3 from '../images/jeans.jpg'
+
 // component for displaying style transfer results
-const ImageWrapper = ({ src, title }) => (
+const ImageWrapper = ({ src, title, imgClass }) => (
     <div className="img-wrapper">
       <p>{title}</p>
-      <img src={src} alt="" />
+      <img className={imgClass} src={src} alt="" />
     </div>
 )
 
 const ResultPage = () => {
   // whether style transfer has finished
   const { design, hasResult } = useContext(AppContext)
+
+  const history = useHistory()
 
   useEffect(() => {
     shouldLoad()
@@ -25,18 +32,32 @@ const ResultPage = () => {
     return !hasResult || design == null
   }
 
+  const styleImage = () => {
+    console.log(design.style_image_name)
+    switch(design.style_image_name) {
+      default: {
+        console.log("Something went wrong, defaulting to stained-glass")
+        return style_2
+      }
+      case 'painting.jpg': return style_1
+      case 'stained-glass.jpg': return style_2
+      case 'jeans.jpg': return style_3
+    }
+  }
   return (
     shouldLoad() ? <div style={{paddingTop: "30vh"}}><PropagateLoader /></div> : 
     <>
-      {/* <Link to="/model" className="button button2"><FontAwesomeIcon icon={faArrowLeft} /> Update Parameters</Link> */}
-      <Link to="/model" className="links"><FontAwesomeIcon icon={faArrowLeft} /> Update Parameters</Link>
-      <div className="cards">
-        <ImageWrapper src={'http://localhost:5000/get_input_image/' + design.id + '.jpg'} title="BEFORE" />
-        <ImageWrapper src={'http://localhost:5000/get_output_image/' + design.id + '.jpg'} title="AFTER" />
+      <div className="button-bar">
+        <button className="links" onClick={() => history.push('/model', { isResuming: true })}><FontAwesomeIcon icon={faArrowLeft} /> UPDATE PARAMETERS</button>
+        {/* <Link to="/new_design" className="links">Start New</Link> */}
+        <Link to="/new_design" className="links">START NEW DESIGN <FontAwesomeIcon icon={faArrowRight} /></Link>
       </div>
-      <Link to="/new_design" className="button button1">Start New</Link>
-      {/* <p style={{padding: "0vh 1vh", display: "inline", margin: "0 auto"}}>/</p>
-      <Link to="/model" className="button button2">Update Current</Link> */}
+      <div className="cards">
+        <ImageWrapper src={'http://localhost:5000/get_input_image/' + design.id + '.jpg'} title="CONTENT" />
+        {/* <ImageWrapper src={'http://localhost:5000/get_input_image/' + design.id + '.jpg'} title="CONTENT" imgClass="small"/>
+        <ImageWrapper src={styleImage()} title="STYLE" imgClass="small" /> */}
+        <ImageWrapper src={'http://localhost:5000/get_output_image/' + design.id + '.jpg'} title="RESULT" />
+      </div>
     </>
   )
 }

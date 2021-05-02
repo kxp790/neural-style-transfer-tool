@@ -31,7 +31,7 @@ const StyleLayerSelectionStep = () => {
 
     return (
         <div className="model-design-step-container large">
-            <h4 style={{textShadow: "1px 1px black"}}>SELECT A STYLE LAYER:</h4>
+            <h4 style={{textShadow: "1px 1px black"}}>SELECT FIVE STYLE LAYERS AND THEIR WEIGHTS:</h4>
             <ModelDesignContext.Consumer>
                 {({styleLayerWeights, setStyleLayerWeight}) => (
                     <div>
