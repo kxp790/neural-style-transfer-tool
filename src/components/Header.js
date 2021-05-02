@@ -8,9 +8,9 @@ const Header = () => {
     return(
         <div className="App-header" title="header">
             <div style={{padding: "0.5vh 10vw"}}>
-                <button onClick={() => history.push("/")} className="logo-link"><img src={logo} className="App-logo logo" alt="logo" /></button>
+                <button title="logoLink" onClick={() => history.push("/")} className="logo-link"><img src={logo} className="App-logo logo" alt="logo" /></button>
             </div>
-            <button onClick={() => history.push("/support")} className='header-links'>Support</button>
+            <button title="supportLink" onClick={() => history.push("/support")} className='header-links'>Support</button>
         </div>
     )
 }
