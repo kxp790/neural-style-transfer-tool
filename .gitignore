@@ -35,11 +35,7 @@ database/
 
 # Model draft 
 api/model.py
-
-# support draft
-src/components/SupportPage.js
-src/vgg16.png
-src/vgg16-simplified.png
+api/image_processing.py
 
 # data folders
 api/data/input

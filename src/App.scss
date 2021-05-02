@@ -41,6 +41,11 @@ body {
   height: 100vh;
 }
 
+.logo-link {
+  background-color: transparent;
+  border: none;
+}
+
 .App-header {
   display: flex;
   justify-content: space-between;
@@ -63,6 +68,8 @@ body {
     text-decoration: none;
     padding-right: 10vw;
     color: azure;
+    background-color: transparent;
+    border: none;
     text-shadow: $primary_1;
   }
 }

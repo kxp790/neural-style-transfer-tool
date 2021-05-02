@@ -1,16 +1,18 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import logo from '../images/logo.png'
 
-const Header = () => (
-    <div className='App-header'>
-        <div style={{padding: "0.5vh 10vw"}}>
-            <Link to='/'><img src={logo} className="App-logo logo" alt="logo" /></Link>
+const Header = () => {
+    const history = useHistory()
+
+    return(
+        <div className="App-header" title="header">
+            <div style={{padding: "0.5vh 10vw"}}>
+                <button onClick={() => history.push("/")} className="logo-link"><img src={logo} className="App-logo logo" alt="logo" /></button>
+            </div>
+            <button onClick={() => history.push("/support")} className='header-links'>Support</button>
         </div>
-        
-        {/* <p className='header-links title'>PHOTO STYLER</p> */}
-        <Link to='/support' className='header-links'>Support</Link>
-    </div>
-)
+    )
+}
 
 export default Header

@@ -50,7 +50,7 @@ const ResultPage = () => {
       <div className="button-bar">
         <button className="links" onClick={() => history.push('/model', { isResuming: true })}><FontAwesomeIcon icon={faArrowLeft} /> UPDATE PARAMETERS</button>
         {/* <Link to="/new_design" className="links">Start New</Link> */}
-        <Link to="/new_design" className="links">START NEW DESIGN <FontAwesomeIcon icon={faArrowRight} /></Link>
+        <button className="links" onClick={() => history.push('/new_design', { isResuming: true })}>START NEW DESIGN <FontAwesomeIcon icon={faArrowRight} /></button>
       </div>
       <div className="cards">
         <ImageWrapper src={'http://localhost:5000/get_input_image/' + design.id + '.jpg'} title="CONTENT" />
