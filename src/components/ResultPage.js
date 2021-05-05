@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import PropagateLoader from 'react-spinners/PropagateLoader'
 import { AppContext } from './AppContext'
 import { useHistory } from 'react-router-dom'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -45,7 +45,13 @@ const ResultPage = () => {
     }
   }
   return (
-    shouldLoad() ? <div style={{paddingTop: "30vh"}}><PropagateLoader /></div> : 
+    shouldLoad() ? 
+    <>
+      <div style={{paddingTop: "30vh"}}><PropagateLoader /></div>
+      <p style={{paddingTop: "5vh"}}>Loading style transfer result!</p>
+      <p style={{paddingTop: "1vh"}}>(this can take minutes depending on the number of iterations)</p>
+    </> 
+    : 
     <>
       <div className="button-bar">
         <button className="links" onClick={() => history.push('/model', { isResuming: true })}><FontAwesomeIcon icon={faArrowLeft} /> UPDATE PARAMETERS</button>
