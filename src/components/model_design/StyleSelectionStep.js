@@ -6,7 +6,7 @@ import style_3 from '../../images/jeans.jpg'
 
 const StyleSelectionStep = () => {
     // list of style options
-    const styles = ['painting.jpg', 'stained-glass.jpg', 'placeholder.jpg']
+    const styles = ['painting.jpg', 'stained-glass.jpg', 'jeans.jpg']
 
     // context
     const { selectedStyleImage, setSelectedStyleImage } = useContext(ModelDesignContext)
