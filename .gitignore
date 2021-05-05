@@ -33,10 +33,6 @@ __pycache__
 # MongoDB local database
 database/
 
-# Model draft 
-api/model.py
-api/image_processing.py
-
 # data folders
 api/data/input
 api/data/output
