@@ -10,13 +10,9 @@ const Parameter = (props) => {
                         <p className="name-box parameter">{props.name}</p>
                     </td>
                     <td style={{width: "18vw", alignContent: "left", display: "flex"}}>
-                        <input className={(/^[1-9][0-9]?$|^100$/).test(props.value) ? "weight-box" : "weight-box invalid"} value={props.value} onChange={props.onChange} type="text" maxLength={props.maxLength} pattern={props.pattern} required></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        {!(/^[1-9][0-9]?$|^100$/).test(props.value) ? <p>Allowed range: 1-100</p> : <p></p>}
+                        <input className={props.value === '' || ((/^[1-9][0-9]?$|^100$/).test(props.value)) ? 'weight-box' : 'weight-box invalid'} 
+                            value={props.value} onChange={props.onChange} type="text" maxLength={props.maxLength} pattern={props.pattern} required>
+                        </input>
                     </td>
                 </tr>
             </tbody>
@@ -28,7 +24,9 @@ const ParameterSelectionStep = () => {
     
     return (
         <div className="model-design-step-container small">
-            <h4 style={{textShadow: "1px 1px black"}}>CUSTOMISE PARAMETERS:</h4>
+            <div style={{paddingBottom: "1vh"}}>
+                <p className="step-description">Customise parameters:</p>
+            </div>
             <ModelDesignContext.Consumer>
                 {({contentWeight, setContentWeight, styleWeight, setStyleWeight, numOfIterations, setNumOfIterations}) => (
                     <div>

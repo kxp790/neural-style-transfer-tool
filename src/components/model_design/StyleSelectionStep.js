@@ -18,7 +18,9 @@ const StyleSelectionStep = () => {
 
     return(
         <div className="model-design-step-container small">
-            <h4 style={{textShadow: "1px 1px black"}}>SELECT A STYLE IMAGE:</h4>
+            <div style={{paddingBottom: "1vh"}}>
+                <p className="step-description">Click on a style image to select it:</p>  
+            </div>
             <table className="style-image-table">
                 <tbody>
                     <tr>

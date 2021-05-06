@@ -72,7 +72,7 @@ const NewDesignPage = () => {
                             type="numeric" 
                             inputMode="number"
                             style={{paddingBottom: "3vh", width: "25vh", minWidth: "fit-content", margin: "0 auto"}}
-                            inputStyle={{borderRadius: "4px", border: "2px solid #374a5c", backgroundColor: "#9db0c2", fontSize: "22px", height: "5vh", width: "5vh", padding: "1vh"}}
+                            inputStyle={{borderRadius: "4px", border: "2px solid #374a5c", backgroundColor: "#7c96ad", color: "azure", textShadow: "1px 1px black", fontWeight: "bold", fontSize: "22px", height: "5vh", width: "5vh", padding: "1vh"}}
                             inputFocusStyle={{borderRadius: "4px", backgroundColor: "#52708a"}}
                             onComplete={(value) => updateInputPin(value)}
                             autoSelect={true}

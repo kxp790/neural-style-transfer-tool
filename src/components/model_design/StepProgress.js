@@ -12,6 +12,8 @@ import { ModelDesignContext } from './ModelDesignContext'
 import ParameterSelectionStep from './ParameterSelectionStep'
 import StyleLayerSelectionStep from './StyleLayerSelectionStep'
 import StyleSelectionStep from './StyleSelectionStep'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProgressStep = (props) => {
     return (
@@ -58,30 +60,65 @@ const StepProgress = (props) => {
         }
     }
 
+    // validation toast style
+    const validationToastStyle = {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    }
+
+    const displayNoImageUploadedToast = () => toast.error('No image selected!', validationToastStyle)
+    const displayNoStyleSelectedToast = () => toast.error('No style selected!', validationToastStyle)
+    const displayNoContentLayerSelectedToast = () => toast.error('No layer selected!', validationToastStyle)
+    const displayNoStyleLayersSelectedToast = () => toast.error('No layers selected!', validationToastStyle)
+    const displayInvalidWeightValueToast = () => toast.error('Invalid weight value!', validationToastStyle)
+    const displayInvalidContentWeightValueToast = () => toast.error('Invalid content weight value!', validationToastStyle)
+    const displayInvalidStyleWeightValueToast = () => toast.error('Invalid style weight value!', validationToastStyle)
+    const displayInvalidNumOfIterationsWeightValueToast = () => toast.error('Invalid number of iterations!', validationToastStyle)
+
     // image input step validator
     // true if image exists in database
     const imageInputValidator = () => {
+        if(!hasSelectedContentImage) displayNoImageUploadedToast()
         return hasSelectedContentImage
     }
 
     // style image selection step validator
     // true if selection is not empty
     const styleSelectionValidator = () => {
-        return (selectedStyleImage !== '') ? true : false
+        if(selectedStyleImage === '') {
+            displayNoStyleSelectedToast() 
+            return false
+        }
+        return true
     }
     
     // content layer selection step validator
     // true if an existing layer is selected
     const contentLayerSelectionValidator = () =>  {
-        return (layers.indexOf(selectedContentLayer) >= 0) ? true : false
+        if(layers.indexOf(selectedContentLayer) <= 0) {
+            displayNoContentLayerSelectedToast()
+            return false
+        }
+        return true
     }
     
     // style layer selection step validator
     // true if at least one layer is selected and weight value is larger than 0 and smaller than 1
     const styleLayerSelectionValidator = () => {
-        if(selectedStyleLayers.length !== 5) return false
+        if(selectedStyleLayers.length === 0) {
+            displayNoStyleLayersSelectedToast()
+            return false
+        }
         for (let layer in selectedStyleLayers) {
-            if(styleLayerWeights[selectedStyleLayers[layer]] <= 0 || styleLayerWeights[selectedStyleLayers[layer]] >= 1) return false
+            if(styleLayerWeights[selectedStyleLayers[layer]] <= 0 || styleLayerWeights[selectedStyleLayers[layer]] >= 1) {
+                displayInvalidWeightValueToast()
+                return false
+            }
         }
         return true
     }
@@ -89,9 +126,19 @@ const StepProgress = (props) => {
     // other parameters step validator
     // true if all values are larger than 0 and smaller than 100
     const parameterSelectionValidator = () => {
-        return ((/^[1-9][0-9]?$|^100$/).test(contentWeight)
-            && (/^[1-9][0-9]?$|^100$/).test(styleWeight)
-            && (/^[1-9][0-9]?$|^100$/).test(numOfIterations)) ? true : false
+        if ((/^([1-9][0-9]{0,3}|10000)$/).test(contentWeight) === false) {
+            displayInvalidContentWeightValueToast()
+            return false
+        }
+        if ((/^([1-9][0-9]{0,3}|10000)$/).test(styleWeight) === false) {
+            displayInvalidStyleWeightValueToast()
+            return false
+        }
+        if ((/^([1-9][0-9]{0,2}|1000)$/).test(numOfIterations) === false) {
+            displayInvalidNumOfIterationsWeightValueToast()
+            return false
+        }
+        return true
     }
 
     // list of validation steps
@@ -182,6 +229,7 @@ const StepProgress = (props) => {
                 {steps[currentStep]}
             </div>
             <button onClick={progressStep}><FontAwesomeIcon icon={faAngleRight} /></button>
+            <ToastContainer />
         </div>
     )
 }

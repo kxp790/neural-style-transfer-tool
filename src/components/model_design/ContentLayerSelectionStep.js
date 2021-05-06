@@ -28,19 +28,23 @@ const ContentLayerSelectionStep = () => {
 
     return (
         <div className="model-design-step-container large">
-            <h4 style={{textShadow: "1px 1px black"}}>SELECT A CONTENT LAYER:</h4>
-            <ModelDesignContext.Consumer>
-                {({layers}) => (
-                    <div>
-                        {layers.map(layer => <ContentLayer 
-                            onPick={(event) => toggleLayer(event)}
-                            isEnabled={(selectedContentLayer === layer)} 
-                            layer={layer}
-                            key={layer}
-                        />)}
-                    </div>
-                )}
-            </ModelDesignContext.Consumer>
+            <div style={{paddingBottom: "1vh"}}>
+                <p className="step-description">Click on one content layer to select it:</p>
+            </div>
+            <div style={{width: "20vw", margin: "0 auto"}}>
+                <ModelDesignContext.Consumer>
+                    {({layers}) => (
+                        <div>
+                            {layers.map(layer => <ContentLayer 
+                                onPick={(event) => toggleLayer(event)}
+                                isEnabled={(selectedContentLayer === layer)} 
+                                layer={layer}
+                                key={layer}
+                            />)}
+                        </div>
+                    )}
+                </ModelDesignContext.Consumer>
+            </div>
         </div> 
     )
 }

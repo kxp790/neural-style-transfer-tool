@@ -19,6 +19,8 @@ $secondary_6: #005254;
 $secondary_7: #003e3f;
 $secondary_8: #00292a;
 
+$shadow: 1px 1px $primary_3;
+
 * {
   box-sizing: border-box;
 }
@@ -68,9 +70,10 @@ body {
     text-decoration: none;
     padding-right: 10vw;
     color: azure;
+    font-size: 16px;
     background-color: transparent;
     border: none;
-    text-shadow: $primary_1;
+    text-shadow: $shadow;
   }
 }
 
@@ -100,7 +103,7 @@ body {
   color: azure;
   background-color: transparent;
   border: none;
-  text-shadow: $primary_1;
+  text-shadow: $shadow;
 }
 
 .img-wrapper {
@@ -147,7 +150,7 @@ body {
   min-width: fit-content;
   font-size: 16px !important;
   border: 2px solid;
-  text-shadow: 1px 1px $primary_1;
+  text-shadow: $shadow;
 
   &.button1 {
     color: azure;
@@ -197,6 +200,15 @@ body {
   &.small{
     padding: 20vh 0vw;
   }
+
+  .step-description {
+    padding: 1vh;
+    font-size: 18px;
+    width: fit-content;
+    max-width: 30vw;
+    text-shadow: $shadow;
+    margin: 0 auto;
+  }
 }
 
 .caption-box {
@@ -210,7 +222,7 @@ body {
   font-size: 26px;
   font-weight: bold;
   color: azure;
-  text-shadow: 1px 1px $primary_6;
+  text-shadow: $shadow;
   width: 200px;
   height: fit-content;
   padding: 0.7vh 0.7vh;
@@ -254,7 +266,7 @@ body {
   .name-box {
     border: 0px solid transparent;
     background-color: transparent;
-    text-shadow: 1px 1px $primary_1;
+    text-shadow: $shadow;
     color: azure;
     min-width: fit-content;
     width: 10vw;
@@ -278,7 +290,7 @@ body {
     min-width: 50px;
     padding: 0.5vh;
     text-align: center;
-    background-color: rgba(157,176,194, 0.8);
+    background-color: rgba($primary_11, 0.8);
     border-radius: 5px;
     border: 2px solid;
     font-size: 16px !important;
@@ -318,12 +330,12 @@ body {
     color: white;
     width: 25px; 
     height: 14.43px;
-    font-size: 12px;
-    background-color: rgba(211, 211, 211, 1);
+    font-size: 14px;
+    background-color: $primary_11;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-shadow: 0px 0px 4px rgba(0,0,0,0.42);
+    text-shadow: $shadow;
   }
 
   .progress-label { 
@@ -342,7 +354,7 @@ body {
 
   .progress-step:before {
     bottom: 100%;
-    border-bottom: 7.22px solid rgba(211, 211, 211, 1);
+    border-bottom: 7.22px solid $primary_11;
   }
 
   .progress-step.filled:before {
@@ -352,7 +364,7 @@ body {
   .progress-step:after {
     top: 100%;
     width: 0;
-    border-top: 7.22px solid rgba(211, 211, 211, 1);
+    border-top: 7.22px solid $primary_11;
   }
 
   .progress-step.filled:after {
