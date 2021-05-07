@@ -3,6 +3,7 @@
 
 import os
 import tensorflow as tf
+import time
 import image_processing
 
 JPG = '.jpg'
@@ -51,20 +52,24 @@ def style_transfer(design):
     generate_image = tf.Variable(content_image)
     
     # define an optimiser
-    optimisator = tf.optimizers.Adam(learning_rate=0.05, beta_1=0.99, epsilon=1e-1)
+    optimiser = tf.optimizers.Adam(learning_rate=0.05, beta_1=0.99, epsilon=1e-1)
     
+    start = time.time()
+
     for i in range(num_of_iterations):
         print(f'Style Transfer Step #{i}')
-        update_image(generate_image, extractor, style_targets, content_targets, optimisator)
+        update_image(generate_image, extractor, style_targets, content_targets, optimiser)
         # for the last step of the transfer save the result and print the the process took
         if(i==(num_of_iterations - 1)):
             image = generate_image.read_value()
             file_path = OUTPUT_FOLDER + design['id'] + JPG
             image_processing.tensor_to_image(image).save(file_path)
+            end = time.time()
+            print("Total time: {:.1f}".format(end-start))
         
 # builds the VGG model
 def vgg_model(layer_names):
-    vgg = tf.keras.applications.VGG19(include_top=False, weights='imagenet')
+    vgg = tf.keras.applications.VGG16(include_top=False, weights='imagenet')
     vgg.trainable = False
     outputs = [vgg.get_layer(name).output for name in layer_names]
     model = tf.keras.Model([vgg.input], outputs)
@@ -82,7 +87,7 @@ class entire_model(tf.keras.models.Model):
 
     def call(self, inputs):
         inputs = inputs * 255.0 
-        preprocessed_input = tf.keras.applications.vgg19.preprocess_input(inputs)
+        preprocessed_input = tf.keras.applications.vgg16.preprocess_input(inputs)
         outputs = self.vgg(preprocessed_input) 
 
         # separate the representations of style and content
@@ -117,11 +122,11 @@ def loss_function(outputs, style_targets, content_targets):
     return loss
 
 # update the image
-def update_image(image, extractor, style_targets, content_targets, optimisator):
+def update_image(image, extractor, style_targets, content_targets, optimiser):
     with tf.GradientTape() as tape:
         outputs = extractor(image)
         loss = loss_function(outputs, style_targets, content_targets)
 
     grad = tape.gradient(loss, image)
-    optimisator.apply_gradients([(grad, image)])
+    optimiser.apply_gradients([(grad, image)])
     image.assign(image_processing.clip_0_1(image))

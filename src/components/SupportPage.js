@@ -71,6 +71,72 @@ const SupportPage = () => (
                     </p>
                 </AccordionItemPanel>
             </AccordionItem>
+
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <AccordionItemButton>
+                        Image Upload Step
+                    </AccordionItemButton>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <p></p>
+                </AccordionItemPanel>
+            </AccordionItem>
+
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <AccordionItemButton>
+                        Style Selection Step
+                    </AccordionItemButton>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <p></p>
+                </AccordionItemPanel>
+            </AccordionItem>
+
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <AccordionItemButton>
+                        Content Layer Selection Step
+                    </AccordionItemButton>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <p></p>
+                </AccordionItemPanel>
+            </AccordionItem>
+
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <AccordionItemButton>
+                        Style Layer Selection Step
+                    </AccordionItemButton>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <p></p>
+                </AccordionItemPanel>
+            </AccordionItem>
+
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <AccordionItemButton>
+                        Other Parameters Step
+                    </AccordionItemButton>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <p></p>
+                </AccordionItemPanel>
+            </AccordionItem>
+
+            <AccordionItem>
+                <AccordionItemHeading>
+                    <AccordionItemButton>
+                        Result Page
+                    </AccordionItemButton>
+                </AccordionItemHeading>
+                <AccordionItemPanel>
+                    <p></p>
+                </AccordionItemPanel>
+            </AccordionItem>
         </Accordion>
     </div>
 )
